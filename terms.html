@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms, Conditions &amp; Privacy Policy — RegoMate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Barlow",sans-serif;background:#0a1628;color:#e8edf5;min-height:100vh;}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:68px;border-bottom:1px solid rgba(255,255,255,0.08);background:rgba(10,22,40,0.97);position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo img{width:40px;height:40px;object-fit:contain;}
+.logo-text{font-family:"Barlow Condensed",sans-serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:.5px;}
+.logo-text span{color:#e8a020;}
+.nav-links{display:flex;gap:2rem;list-style:none;font-size:14px;font-weight:500;}
+.nav-links a{color:rgba(232,237,245,0.6);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:#fff;}
+.nav-cta{background:#e8a020;color:#0a1628;border:none;padding:10px 22px;border-radius:6px;font-family:"Barlow",sans-serif;font-size:14px;font-weight:700;cursor:pointer;}
+
+.page-hero{background:linear-gradient(135deg,#0f1f3d 0%,#0a1628 100%);border-bottom:1px solid rgba(255,255,255,0.07);padding:4rem 3rem 3rem;}
+.page-hero-inner{max-width:900px;margin:0 auto;}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:rgba(232,237,245,0.45);font-size:13px;text-decoration:none;margin-bottom:1.5rem;transition:color .2s;}
+.back-link:hover{color:#e8a020;}
+.page-hero h1{font-family:"Barlow Condensed",sans-serif;font-size:48px;font-weight:800;color:#fff;margin-bottom:.5rem;}
+.page-hero .sub{font-size:15px;color:rgba(232,237,245,0.45);}
+.updated{display:inline-block;background:rgba(232,160,32,0.12);border:1px solid rgba(232,160,32,0.3);color:#e8a020;font-size:12px;font-weight:700;padding:4px 12px;border-radius:4px;margin-top:1rem;}
+
+.tc-layout{max-width:900px;margin:0 auto;padding:3rem;}
+
+.tab-switcher{display:flex;gap:8px;margin-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:0;}
+.ts-btn{background:transparent;border:none;border-bottom:3px solid transparent;padding:10px 20px;font-family:"Barlow",sans-serif;font-size:15px;font-weight:600;color:rgba(232,237,245,0.45);cursor:pointer;transition:all .2s;margin-bottom:-1px;}
+.ts-btn.active{color:#e8a020;border-bottom-color:#e8a020;}
+.ts-btn:hover{color:#fff;}
+
+.doc-section{display:none;}
+.doc-section.active{display:block;}
+
+.toc{background:#111e35;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1.5rem 2rem;margin-bottom:2.5rem;}
+.toc-title{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(232,237,245,0.4);margin-bottom:1rem;}
+.toc ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 2rem;}
+.toc li a{font-size:13px;color:rgba(232,237,245,0.55);text-decoration:none;transition:color .2s;display:block;padding:3px 0;}
+.toc li a:hover{color:#e8a020;}
+
+.clause{margin-bottom:2.5rem;}
+.clause-num{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#e8a020;margin-bottom:.4rem;}
+.clause h2{font-family:"Barlow Condensed",sans-serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid rgba(255,255,255,0.07);}
+.clause h3{font-size:15px;font-weight:700;color:#e8edf5;margin:1.2rem 0 .5rem;}
+.clause p{font-size:14px;color:rgba(232,237,245,0.65);line-height:1.8;margin-bottom:.75rem;}
+.clause ul{list-style:none;margin:.5rem 0 .75rem;}
+.clause ul li{font-size:14px;color:rgba(232,237,245,0.65);line-height:1.7;padding:3px 0 3px 1.25rem;position:relative;}
+.clause ul li::before{content:"•";position:absolute;left:0;color:#e8a020;}
+
+.new-badge{display:inline-block;background:rgba(29,158,117,0.15);border:1px solid rgba(29,158,117,0.3);color:#1d9e75;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase;margin-left:8px;vertical-align:middle;}
+
+.highlight-box{background:rgba(232,160,32,0.07);border-left:3px solid #e8a020;border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:1rem 0;}
+.highlight-box p{color:rgba(232,237,245,0.7);margin:0;}
+.highlight-box strong{color:#e8a020;}
+
+.sms-schedule{background:#111e35;border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;margin:1rem 0;}
+.sms-row{display:flex;align-items:center;gap:1rem;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.sms-row:last-child{border-bottom:none;}
+.sms-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sms-dot.green{background:#1d9e75;}
+.sms-dot.amber{background:#e8a020;}
+.sms-dot.red{background:#e24b4a;}
+.sms-when{font-size:13px;font-weight:700;color:#fff;min-width:160px;}
+.sms-detail{font-size:12px;color:rgba(232,237,245,0.45);}
+
+.contact-box{background:#111e35;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.25rem 1.5rem;margin-top:1rem;}
+.contact-box a{color:#e8a020;text-decoration:none;}
+
+footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.75rem 3rem;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(232,237,245,0.3);margin-top:3rem;}
+.footer-logo{display:flex;align-items:center;gap:8px;}
+.footer-logo img{width:26px;height:26px;object-fit:contain;opacity:.5;}
+.footer-logo-text{font-family:"Barlow Condensed",sans-serif;font-size:18px;font-weight:800;color:rgba(255,255,255,0.35);}
+.footer-logo-text span{color:rgba(232,160,32,0.55);}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{color:inherit;text-decoration:none;}
+.footer-links a:hover{color:rgba(232,237,245,0.6);}
+.footer-links a.active-page{color:#e8a020;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">
+    <img src="data:image/png;base64,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" alt="RegoMate">
+    <div class="logo-text">REGO<span>MATE</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#how">How it works</a></li>
+    <li><a href="index.html#sms">SMS reminders</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="terms.html" style="font-size:13px;color:#e8a020;font-weight:700;text-decoration:none;margin-right:.5rem;">T&amp;Cs &amp; Privacy</a><button class="nav-cta" onclick="window.location='index.html'">Get Started</button>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <a class="back-link" href="index.html">&#8592; Back to RegoMate</a>
+    <h1>Terms, Conditions &amp; Privacy Policy</h1>
+    <p class="sub">Please read these carefully before using our services.</p>
+    <div class="updated">Last Updated: 5 May 2026</div>
+  </div>
+</div>
+
+<div class="tc-layout">
+
+  <div class="tab-switcher">
+    <button class="ts-btn active" onclick="showDoc('tc')">Terms &amp; Conditions</button>
+    <button class="ts-btn" onclick="showDoc('privacy')">Privacy Policy</button>
+  </div>
+
+  <!-- ═══════════════════════════ TERMS & CONDITIONS ═══════════════════════ -->
+  <div id="doc-tc" class="doc-section active">
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ul>
+        <li><a href="#tc1">1. About Rego Mate</a></li>
+        <li><a href="#tc2">2. Eligibility</a></li>
+        <li><a href="#tc3">3. User Accounts</a></li>
+        <li><a href="#tc4">4. Service Description</a></li>
+        <li><a href="#tc5">5. User Responsibilities</a></li>
+        <li><a href="#tc6">6. Accuracy of Information</a></li>
+        <li><a href="#tc7">7. Sticker Delivery</a></li>
+        <li><a href="#tc8">8. Payments &amp; Subscriptions</a></li>
+        <li><a href="#tc8a">8A. Sticker Policy</a></li>
+        <li><a href="#tc8b">8B. SMS Reminder Service</a></li>
+        <li><a href="#tc9">9. Third-Party Services</a></li>
+        <li><a href="#tc10">10. Intellectual Property</a></li>
+        <li><a href="#tc11">11. Limitation of Liability</a></li>
+        <li><a href="#tc12">12. No Government Affiliation</a></li>
+        <li><a href="#tc13">13. Termination</a></li>
+        <li><a href="#tc14">14. Changes to These Terms</a></li>
+        <li><a href="#tc15">15. Governing Law</a></li>
+        <li><a href="#tc16">16. Contact Us</a></li>
+      </ul>
+    </div>
+
+    <p style="font-size:14px;color:rgba(232,237,245,0.55);line-height:1.8;margin-bottom:2rem;">Welcome to Rego Mate (we, our, us). These Terms and Conditions govern your use of our website RegoMate.com, our mobile application, and any related services we provide. By accessing or using our Services, you agree to be bound by these Terms.</p>
+
+    <div class="clause" id="tc1">
+      <div class="clause-num">Clause 1</div>
+      <h2>About Rego Mate</h2>
+      <p>Rego Mate provides reminder tools to help users track their vehicle registration and driver&#39;s licence due dates. Our services include:</p>
+      <ul>
+        <li>Personalised windscreen reminder stickers (first year of subscription only)</li>
+        <li>Automatic SMS reminders for rego and licence renewal dates</li>
+        <li>Annual subscription management</li>
+      </ul>
+      <p>Rego Mate is not a government agency and does not process or renew vehicle registrations.</p>
+    </div>
+
+    <div class="clause" id="tc2">
+      <div class="clause-num">Clause 2</div>
+      <h2>Eligibility</h2>
+      <p>To use our Services, you must:</p>
+      <ul>
+        <li>Be at least 18 years old</li>
+        <li>Provide accurate and complete information</li>
+        <li>Have the legal capacity to enter into a binding agreement</li>
+      </ul>
+    </div>
+
+    <div class="clause" id="tc3">
+      <div class="clause-num">Clause 3</div>
+      <h2>User Accounts</h2>
+      <p>When creating an account, you agree to:</p>
+      <ul>
+        <li>Provide accurate, current, and complete information</li>
+        <li>Keep your login credentials secure</li>
+        <li>Notify us of any unauthorised access</li>
+      </ul>
+      <p>We may suspend or terminate accounts that violate these Terms.</p>
+    </div>
+
+    <div class="clause" id="tc4">
+      <div class="clause-num">Clause 4</div>
+      <h2>Service Description</h2>
+      <p>Rego Mate provides:</p>
+      <ul>
+        <li>A personalised physical windscreen sticker included in the first year of subscription (see clause 8A)</li>
+        <li>Automated SMS reminders based on the rego and licence expiry dates you provide (see clause 8B)</li>
+        <li>Annual subscription management with automatic renewal (see clause 8)</li>
+      </ul>
+      <p>We may modify or discontinue features at any time with reasonable notice where possible.</p>
+    </div>
+
+    <div class="clause" id="tc5">
+      <div class="clause-num">Clause 5</div>
+      <h2>User Responsibilities</h2>
+      <p>You are solely responsible for:</p>
+      <ul>
+        <li>Providing correct vehicle registration and licence expiry information</li>
+        <li>Providing a current mobile number to receive SMS reminders</li>
+        <li>Updating your details if they change</li>
+        <li>Ensuring your registration and licence are renewed on time</li>
+        <li>Checking official government notices</li>
+      </ul>
+      <p>Rego Mate is a convenience tool only and does not replace your obligation to monitor your own registration and licence status.</p>
+    </div>
+
+    <div class="clause" id="tc6">
+      <div class="clause-num">Clause 6</div>
+      <h2>Accuracy of Information</h2>
+      <p>You acknowledge that Rego Mate relies entirely on the information you provide, and that incorrect or outdated information may result in missed or incorrect reminders.</p>
+      <p>Rego Mate is not liable for:</p>
+      <ul>
+        <li>Missed registration or licence deadlines</li>
+        <li>Fines, penalties, or legal consequences</li>
+        <li>Incorrect reminders caused by user-provided information</li>
+        <li>Failure to update contact details or mobile number</li>
+        <li>Postal delays or lost stickers</li>
+      </ul>
+      <p>Your registration and licence obligations remain your responsibility at all times.</p>
+    </div>
+
+    <div class="clause" id="tc7">
+      <div class="clause-num">Clause 7</div>
+      <h2>Sticker Delivery</h2>
+      <p>If you order a windscreen sticker: delivery times may vary, we are not responsible for postal delays or lost mail, and you must ensure your postal address is correct. See clause 8A for the full sticker policy.</p>
+    </div>
+
+    <div class="clause" id="tc8">
+      <div class="clause-num">Clause 8</div>
+      <h2>Payments &amp; Subscriptions</h2>
+      <p>Rego Mate operates on an annual subscription basis. By subscribing, you agree to the following:</p>
+
+      <h3>8.1 Subscription Tiers</h3>
+      <ul>
+        <li><strong style="color:#e8edf5;">First Year (Starter) — $14.99 AUD:</strong> includes one personalised physical sticker posted to your address, plus all SMS reminder services for 12 months.</li>
+        <li><strong style="color:#e8edf5;">Subsequent Years (Renewal) — $9.99 AUD per year:</strong> includes all SMS reminder services. No sticker is included unless separately ordered.</li>
+      </ul>
+
+      <h3>8.2 Automatic Renewal</h3>
+      <p>Your subscription automatically renews annually at the then-current renewal rate ($9.99 AUD unless otherwise advised). You will receive a reminder at least 7 days before each renewal date. Continued use after the renewal date constitutes acceptance of the renewed subscription.</p>
+
+      <h3>8.3 Payment Processing</h3>
+      <p>Payments are processed by Stripe. By providing your payment details, you authorise Stripe to charge the applicable fee on your behalf. We do not store full payment card details.</p>
+
+      <h3>8.4 Failed Payments</h3>
+      <p>If a renewal payment fails, we will notify you to update your payment details. Your SMS reminder service may be suspended until payment is received. We are not liable for any missed reminders during a period of payment failure.</p>
+
+      <h3>8.5 Refunds</h3>
+      <p>Fees are non-refundable unless required by Australian Consumer Law. Contact us at <a href="mailto:support@regomate.com" style="color:#e8a020;">support@regomate.com</a> if you believe you are entitled to a refund.</p>
+
+      <h3>8.6 Cancellation</h3>
+      <p>You may cancel your subscription at any time via your account settings or by contacting us. Cancellation takes effect at the end of your current subscription period. No partial refunds are provided for unused portions unless required by law.</p>
+    </div>
+
+    <div class="clause" id="tc8a">
+      <div class="clause-num">Clause 8A</div>
+      <h2>Sticker Policy <span class="new-badge">New</span></h2>
+
+      <h3>8A.1 Included Sticker (First Year Only)</h3>
+      <p>One personalised windscreen reminder sticker is included in your first-year subscription ($14.99). The sticker is posted to your nominated address within 3&#8211;5 business days of your subscription being confirmed.</p>
+
+      <h3>8A.2 Replacement Stickers</h3>
+      <p>A replacement sticker may be ordered at any time during an active subscription — for example, if your sticker is damaged, lost, or you obtain a new driver&#39;s licence. Replacement stickers are subject to an additional fee as displayed on the website at the time of ordering.</p>
+
+      <h3>8A.3 Delivery</h3>
+      <ul>
+        <li>You are responsible for ensuring your postal address is accurate at the time of ordering</li>
+        <li>We post stickers via Australia Post — delivery times may vary</li>
+        <li>We are not responsible for postal delays, lost mail, or undelivered stickers due to an incorrect address</li>
+        <li>If a sticker is not received within 10 business days of dispatch, contact us at support@regomate.com</li>
+      </ul>
+
+      <h3>8A.4 Disclaimer</h3>
+      <p>The sticker is a convenience reminder tool only. It does not represent an official registration or compliance document. You remain solely responsible for renewing your vehicle registration and driver&#39;s licence by the required dates.</p>
+    </div>
+
+    <div class="clause" id="tc8b">
+      <div class="clause-num">Clause 8B</div>
+      <h2>SMS Reminder Service <span class="new-badge">New</span></h2>
+
+      <h3>8B.1 Reminders Included</h3>
+      <p>All active subscribers receive automatic SMS reminders for both their vehicle registration expiry date and their driver&#39;s licence expiry date, sent to the mobile number provided at sign-up.</p>
+
+      <h3>8B.2 Reminder Schedule</h3>
+      <p>Reminders are sent at the following intervals before each expiry date:</p>
+      <div class="sms-schedule">
+        <div class="sms-row"><div class="sms-dot green"></div><div class="sms-when">6 weeks before</div><div class="sms-detail">First heads-up — plenty of time to plan</div></div>
+        <div class="sms-row"><div class="sms-dot green"></div><div class="sms-when">4 weeks before</div><div class="sms-detail">Second reminder — time to book it in</div></div>
+        <div class="sms-row"><div class="sms-dot amber"></div><div class="sms-when">2 weeks before</div><div class="sms-detail">Getting close — action recommended</div></div>
+        <div class="sms-row"><div class="sms-dot red"></div><div class="sms-when">Daily — final 7 days</div><div class="sms-detail">Every day until you have renewed</div></div>
+      </div>
+      <p>Reminders are sent independently for your rego expiry and your licence expiry.</p>
+
+      <h3>8B.3 Opt-Out</h3>
+      <p>You may opt out of SMS reminders at any time by:</p>
+      <ul>
+        <li>Replying <strong style="color:#e8edf5;">STOP</strong> to any reminder SMS</li>
+        <li>Logging into your account and updating your SMS preferences</li>
+        <li>Contacting us at support@regomate.com</li>
+      </ul>
+      <div class="highlight-box">
+        <p>Opting out of SMS reminders <strong>does not cancel your subscription</strong> or entitle you to a refund. You may opt back in at any time through your account preferences.</p>
+      </div>
+
+      <h3>8B.4 Consent to Receive SMS</h3>
+      <p>By providing your mobile number and subscribing, you consent to receiving automated SMS messages from us relating to your vehicle registration and licence reminders. Standard carrier message rates may apply.</p>
+
+      <h3>8B.5 Delivery Limitations</h3>
+      <p>We are not responsible for SMS messages not received due to mobile carrier outages, an incorrect or inactive mobile number, device settings, or international roaming restrictions. If you change your mobile number, update it in your account settings immediately.</p>
+    </div>
+
+    <div class="clause" id="tc9">
+      <div class="clause-num">Clause 9</div>
+      <h2>Third-Party Services</h2>
+      <p>We use the following third-party services to deliver our Services:</p>
+      <ul>
+        <li>Stripe — payment processing</li>
+        <li>SMS gateway providers — SMS reminder delivery</li>
+        <li>Australia Post — physical sticker postal delivery</li>
+        <li>Hosting and infrastructure providers</li>
+      </ul>
+      <p>We are not responsible for the content, accuracy, privacy practices, or security of third-party providers. Use of third-party services is subject to their own terms and privacy policies.</p>
+    </div>
+
+    <div class="clause" id="tc10">
+      <div class="clause-num">Clause 10</div>
+      <h2>Intellectual Property</h2>
+      <p>All content, branding, logos, and materials on Rego Mate are owned by or licensed to us. You may not copy, modify, or distribute our content without permission.</p>
+    </div>
+
+    <div class="clause" id="tc11">
+      <div class="clause-num">Clause 11</div>
+      <h2>Limitation of Liability</h2>
+      <p>To the fullest extent permitted by Australian law, Rego Mate is not liable for missed registration or licence deadlines, fines or penalties, loss of data or profits, errors or failures in SMS delivery, or postal delays or lost stickers.</p>
+      <p>Where liability cannot be excluded by law (including under the Australian Consumer Law), our liability is limited to the resupply of the service or the cost of the subscription fee paid, whichever is lesser.</p>
+    </div>
+
+    <div class="clause" id="tc12">
+      <div class="clause-num">Clause 12</div>
+      <h2>No Government Affiliation</h2>
+      <p>Rego Mate is a private service and is not affiliated with any Australian government, transport authority, state or territory roads authority, or vehicle registration agency.</p>
+    </div>
+
+    <div class="clause" id="tc13">
+      <div class="clause-num">Clause 13</div>
+      <h2>Termination</h2>
+      <p>We may suspend or terminate your access if you violate these Terms, we suspect fraudulent activity, or we discontinue the Services. You may cancel your subscription at any time as set out in clause 8.6.</p>
+    </div>
+
+    <div class="clause" id="tc14">
+      <div class="clause-num">Clause 14</div>
+      <h2>Changes to These Terms</h2>
+      <p>We may update these Terms from time to time. We will notify you of material changes by SMS or email prior to the changes taking effect. Continued use of the Services after notification constitutes acceptance of the updated Terms.</p>
+    </div>
+
+    <div class="clause" id="tc15">
+      <div class="clause-num">Clause 15</div>
+      <h2>Governing Law</h2>
+      <p>These Terms are governed by the laws of Australia and the state or territory in which you reside. Any disputes shall be subject to the exclusive jurisdiction of the courts of that state or territory.</p>
+    </div>
+
+    <div class="clause" id="tc16">
+      <div class="clause-num">Clause 16</div>
+      <h2>Contact Us</h2>
+      <div class="contact-box">
+        <p style="margin-bottom:6px;"><strong style="color:#fff;">Email:</strong> <a href="mailto:support@regomate.com">support@regomate.com</a></p>
+        <p><strong style="color:#fff;">Website:</strong> <a href="https://regomate.com">RegoMate.com</a></p>
+      </div>
+    </div>
+
+  </div><!-- end tc -->
+
+  <!-- ═══════════════════════════ PRIVACY POLICY ═══════════════════════════ -->
+  <div id="doc-privacy" class="doc-section">
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ul>
+        <li><a href="#pp1">1. Information We Collect</a></li>
+        <li><a href="#pp2">2. How We Collect Information</a></li>
+        <li><a href="#pp3">3. How We Use Your Information</a></li>
+        <li><a href="#pp4">4. Accuracy of Information</a></li>
+        <li><a href="#pp5">5. How We Store &amp; Protect</a></li>
+        <li><a href="#pp6">6. Sharing Your Information</a></li>
+        <li><a href="#pp7">7. Cookies &amp; Tracking</a></li>
+        <li><a href="#pp8">8. Your Rights &amp; Access</a></li>
+        <li><a href="#pp9">9. Data Retention</a></li>
+        <li><a href="#pp10">10. Overseas Disclosure</a></li>
+        <li><a href="#pp11">11. Changes to This Policy</a></li>
+        <li><a href="#pp12">12. Contact &amp; Complaints</a></li>
+      </ul>
+    </div>
+
+    <p style="font-size:14px;color:rgba(232,237,245,0.55);line-height:1.8;margin-bottom:2rem;">This Privacy Policy explains how Rego Mate collects, uses, stores, and protects your personal information in accordance with the Australian Privacy Principles (APPs) under the Privacy Act 1988 (Cth). By using our Services, you consent to the practices described in this Policy.</p>
+
+    <div class="clause" id="pp1">
+      <div class="clause-num">Section 1</div>
+      <h2>Information We Collect</h2>
+      <h3>Personal Information</h3>
+      <ul>
+        <li>Name, email address, mobile number, postal address</li>
+        <li>Account login details</li>
+      </ul>
+      <h3>Vehicle Information</h3>
+      <ul>
+        <li>Vehicle registration plate number and state</li>
+        <li>Registration expiry date</li>
+        <li>Driver&#39;s licence expiry date</li>
+        <li>Vehicle make/model (if provided)</li>
+      </ul>
+      <h3>Usage Information</h3>
+      <ul>
+        <li>Device information, IP address, pages visited, app activity</li>
+      </ul>
+      <h3>Payment Information</h3>
+      <p>Processed securely by Stripe. We do not store full payment card details.</p>
+    </div>
+
+    <div class="clause" id="pp2">
+      <div class="clause-num">Section 2</div>
+      <h2>How We Collect Information</h2>
+      <p>We collect information through account creation and sign-up, sticker orders, SMS reminder setup, website or app usage, and customer support interactions.</p>
+    </div>
+
+    <div class="clause" id="pp3">
+      <div class="clause-num">Section 3</div>
+      <h2>How We Use Your Information</h2>
+      <p>We use your information to:</p>
+      <ul>
+        <li>Send vehicle registration and driver&#39;s licence SMS reminders</li>
+        <li>Deliver windscreen stickers to your postal address</li>
+        <li>Process subscription payments and manage renewals</li>
+        <li>Send subscription renewal notices</li>
+        <li>Provide customer support and improve our Services</li>
+        <li>Communicate important service updates</li>
+      </ul>
+      <p>We do not sell your personal information to third parties.</p>
+    </div>
+
+    <div class="clause" id="pp4">
+      <div class="clause-num">Section 4</div>
+      <h2>Accuracy of Information</h2>
+      <p>You are responsible for ensuring your information is accurate, complete, and up to date. Rego Mate is not responsible for missed reminders or incorrect notifications caused by inaccurate information provided by you.</p>
+    </div>
+
+    <div class="clause" id="pp5">
+      <div class="clause-num">Section 5</div>
+      <h2>How We Store and Protect Your Information</h2>
+      <p>We take reasonable steps to protect your information from loss, misuse, unauthorised access, modification, and disclosure. However, no method of transmission or storage is completely secure. We encourage you to use a strong password and keep your credentials confidential.</p>
+    </div>
+
+    <div class="clause" id="pp6">
+      <div class="clause-num">Section 6</div>
+      <h2>Sharing Your Information</h2>
+      <p>We may share your information with:</p>
+      <ul>
+        <li>Stripe — for payment processing</li>
+        <li>SMS gateway providers — to deliver reminder messages to your mobile</li>
+        <li>Australia Post — for sticker delivery (postal address only)</li>
+        <li>IT, hosting, and infrastructure providers</li>
+      </ul>
+      <p>We do not share your information with government agencies unless required by law. All third-party providers are required to handle your information in accordance with applicable privacy laws.</p>
+    </div>
+
+    <div class="clause" id="pp7">
+      <div class="clause-num">Section 7</div>
+      <h2>Cookies &amp; Tracking</h2>
+      <p>We may use cookies and similar technologies to improve website functionality, analyse usage, and personalise your experience. You can disable cookies in your browser settings, though this may affect some features of the site.</p>
+    </div>
+
+    <div class="clause" id="pp8">
+      <div class="clause-num">Section 8</div>
+      <h2>Accessing or Updating Your Information</h2>
+      <p>You may request to:</p>
+      <ul>
+        <li>Access the personal information we hold about you</li>
+        <li>Correct inaccurate information</li>
+        <li>Delete your account and associated data</li>
+        <li>Opt out of SMS reminders (see clause 8B.3 of our Terms)</li>
+      </ul>
+      <p>Contact us at <a href="mailto:support@regomate.com" style="color:#e8a020;">support@regomate.com</a>. We will respond within 30 days.</p>
+    </div>
+
+    <div class="clause" id="pp9">
+      <div class="clause-num">Section 9</div>
+      <h2>Data Retention</h2>
+      <p>We retain your personal information only as long as necessary to provide and manage your subscription, comply with legal obligations, and resolve disputes. When you cancel your account, we will delete or de-identify your personal information within a reasonable time unless required to retain it by law.</p>
+    </div>
+
+    <div class="clause" id="pp10">
+      <div class="clause-num">Section 10</div>
+      <h2>Overseas Disclosure</h2>
+      <p>Some third-party providers may store or process data overseas. We take reasonable steps to ensure they comply with privacy standards comparable to the Australian Privacy Principles.</p>
+    </div>
+
+    <div class="clause" id="pp11">
+      <div class="clause-num">Section 11</div>
+      <h2>Changes to This Privacy Policy</h2>
+      <p>We may update this Policy from time to time. We will notify you of material changes via SMS or email. Continued use of the Services after notification constitutes acceptance of the updated Policy.</p>
+    </div>
+
+    <div class="clause" id="pp12">
+      <div class="clause-num">Section 12</div>
+      <h2>Contact &amp; Complaints</h2>
+      <div class="contact-box">
+        <p style="margin-bottom:6px;"><strong style="color:#fff;">Email:</strong> <a href="mailto:support@regomate.com">support@regomate.com</a></p>
+        <p style="margin-bottom:12px;"><strong style="color:#fff;">Website:</strong> <a href="https://regomate.com">RegoMate.com</a></p>
+        <p style="font-size:13px;color:rgba(232,237,245,0.45);">If you are not satisfied with our response to a privacy concern, you may lodge a complaint with the <strong style="color:rgba(232,237,245,0.7);">Office of the Australian Information Commissioner (OAIC)</strong> at <a href="https://www.oaic.gov.au" style="color:#e8a020;">www.oaic.gov.au</a>.</p>
+      </div>
+    </div>
+
+  </div><!-- end privacy -->
+
+</div><!-- end tc-layout -->
+
+<div style="background:#111e35;border-top:1px solid rgba(255,255,255,0.07);padding:3rem;text-align:center;">
+  <div style="max-width:520px;margin:0 auto;">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;margin-bottom:.5rem;">Ready to get started?</div>
+    <p style="font-size:14px;color:rgba(232,237,245,0.45);margin-bottom:1.5rem;line-height:1.6;">Sign up for RegoMate and never miss a rego or licence renewal again.</p>
+    <a href="index.html" style="display:inline-block;background:#e8a020;color:#0a1628;padding:13px 32px;border-radius:7px;font-family:'Barlow',sans-serif;font-size:15px;font-weight:700;text-decoration:none;">Get your sticker — $14.99 →</a>
+  </div>
+</div>
+<footer>
+  <div class="footer-logo">
+    <img src="data:image/png;base64,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" alt="">
+    <div class="footer-logo-text">REGO<span>MATE</span></div>
+  </div>
+  <div style="color:rgba(232,237,245,0.3);font-size:12px;">&#169; 2026 RegoMate. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="terms.html" class="active-page" style="color:#e8a020;">Terms &amp; Conditions &amp; Privacy</a>
+  </div>
+</footer>
+
+<script>
+function showDoc(name) {
+  document.querySelectorAll(".doc-section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".ts-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById("doc-" + name).classList.add("active");
+  event.target.classList.add("active");
+}
+</script>
+</body>
+</html>
