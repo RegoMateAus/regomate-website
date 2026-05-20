@@ -170,13 +170,15 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.75rem 3rem;display:
     <div class="clause" id="tc3">
       <div class="clause-num">Clause 3</div>
       <h2>User Accounts</h2>
-      <p>When creating an account, you agree to:</p>
+      <p>When you purchase a RegoMate subscription, an online account is automatically created for you using the email address provided at checkout. You will receive an email inviting you to set your password and access your account at <a href="https://regomate.com/account.html" style="color:#e8a020;">regomate.com/account.html</a>.</p>
+      <p style="margin-top:.75rem;">By having an account, you agree to:</p>
       <ul>
         <li>Provide accurate, current, and complete information</li>
-        <li>Keep your login credentials secure</li>
-        <li>Notify us of any unauthorised access</li>
+        <li>Keep your login credentials secure and confidential</li>
+        <li>Notify us promptly of any unauthorised access to your account</li>
+        <li>Keep your vehicle and personal details up to date</li>
       </ul>
-      <p>We may suspend or terminate accounts that violate these Terms.</p>
+      <p style="margin-top:.75rem;">We may suspend or terminate accounts that violate these Terms.</p>
     </div>
 
     <div class="clause" id="tc4">
@@ -420,7 +422,14 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.75rem 3rem;display:
     <div class="clause" id="pp2">
       <div class="clause-num">Section 2</div>
       <h2>How We Collect Information</h2>
-      <p>We collect information through account creation and sign-up, sticker orders, SMS reminder setup, website or app usage, and customer support interactions.</p>
+      <p>We collect information through:</p>
+      <ul>
+        <li>Subscription sign-up and checkout (via our website and Stripe)</li>
+        <li>Automatic account creation at the time of purchase — when you complete a purchase, we create a secure online account using your email address via Supabase Authentication</li>
+        <li>Sticker orders and vehicle detail entry</li>
+        <li>SMS reminder setup and preference management</li>
+        <li>Website usage and customer support interactions</li>
+      </ul>
     </div>
 
     <div class="clause" id="pp3">
@@ -447,7 +456,8 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.75rem 3rem;display:
     <div class="clause" id="pp5">
       <div class="clause-num">Section 5</div>
       <h2>How We Store and Protect Your Information</h2>
-      <p>We take reasonable steps to protect your information from loss, misuse, unauthorised access, modification, and disclosure. However, no method of transmission or storage is completely secure. We encourage you to use a strong password and keep your credentials confidential.</p>
+      <p>Your personal information is stored securely in a cloud database provided by Supabase, hosted on AWS infrastructure in the United States. Supabase uses industry-standard encryption in transit (TLS) and at rest. Authentication credentials are managed by Supabase Authentication and are never stored in plain text.</p>
+      <p style="margin-top:.75rem;">We take reasonable steps to protect your information from loss, misuse, unauthorised access, modification, and disclosure. However, no method of transmission or storage is completely secure. We encourage you to use a strong password and keep your credentials confidential.</p>
     </div>
 
     <div class="clause" id="pp6">
@@ -455,10 +465,11 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.75rem 3rem;display:
       <h2>Sharing Your Information</h2>
       <p>We may share your information with:</p>
       <ul>
-        <li>Stripe — for payment processing</li>
-        <li>SMS gateway providers — to deliver reminder messages to your mobile</li>
+        <li>Stripe — for secure payment processing</li>
+        <li>Supabase — for database storage and user authentication</li>
+        <li>Twilio — to deliver SMS reminder messages to your mobile</li>
         <li>Australia Post — for sticker delivery (postal address only)</li>
-        <li>IT, hosting, and infrastructure providers</li>
+        <li>Railway — for backend hosting and infrastructure</li>
       </ul>
       <p>We do not share your information with government agencies unless required by law. All third-party providers are required to handle your information in accordance with applicable privacy laws.</p>
     </div>
