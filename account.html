@@ -205,10 +205,10 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.5rem 3rem;display:f
   </a>
   <div class="nav-right">
     <div class="nav-user">
-      <div class="avatar">JH</div>
-      <span>James Hartley</span>
+      <div class="avatar" id="nav-initials">—</div>
+      <span id="nav-name">Loading…</span>
     </div>
-    <button class="nav-logout" onclick="window.location.href='index.html'">Log out</button>
+    <button class="nav-logout" onclick="logout()">Log out</button>
   </div>
 </nav>
 
@@ -216,27 +216,27 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.5rem 3rem;display:f
 <div class="acct-hero">
   <div class="acct-hero-inner">
     <div class="acct-profile">
-      <div class="acct-avatar">JH</div>
+      <div class="acct-avatar" id="hero-initials">—</div>
       <div>
-        <div class="acct-name">James Hartley</div>
-        <div class="acct-sub">Member since January 2025 &nbsp;·&nbsp; support@regomate.com</div>
+        <div class="acct-name" id="hero-name">Loading…</div>
+        <div class="acct-sub" id="hero-sub"></div>
         <div class="acct-badges">
           <span class="badge badge-green"><span class="badge-dot"></span>Active subscriber</span>
-          <span class="badge badge-gold">Plate: ABC 123 &nbsp;·&nbsp; QLD</span>
+          <span class="badge badge-gold" id="hero-plate"></span>
         </div>
       </div>
     </div>
     <div class="acct-stats">
       <div class="acct-stat">
-        <div class="acct-stat-val">47</div>
+        <div class="acct-stat-val" id="stat-rego-days">—</div>
         <div class="acct-stat-lbl">Days to rego</div>
       </div>
       <div class="acct-stat">
-        <div class="acct-stat-val">189</div>
+        <div class="acct-stat-val" id="stat-lic-days">—</div>
         <div class="acct-stat-lbl">Days to licence</div>
       </div>
       <div class="acct-stat">
-        <div class="acct-stat-val">$9.99</div>
+        <div class="acct-stat-val" id="stat-renewal">$9.99</div>
         <div class="acct-stat-lbl">Next renewal</div>
       </div>
     </div>
@@ -263,14 +263,14 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.5rem 3rem;display:f
 
   <div class="dash-grid">
     <div class="stat-card warn">
-      <div class="stat-card-val">47 days</div>
+      <div class="stat-card-val" id="dash-rego-days">—</div>
       <div class="stat-card-lbl">Until rego expires</div>
-      <div style="margin-top:.75rem;font-size:13px;color:rgba(232,237,245,0.5);">Rego plate <strong style="color:#fff;">ABC 123</strong> expires <strong style="color:#e8a020;">June 2026</strong></div>
+      <div style="margin-top:.75rem;font-size:13px;color:rgba(232,237,245,0.5);">Rego plate <strong style="color:#fff;" id="dash-plate">—</strong> expires <strong style="color:#e8a020;" id="dash-rego-date">—</strong></div>
     </div>
     <div class="stat-card good">
-      <div class="stat-card-val">189 days</div>
+      <div class="stat-card-val" id="dash-lic-days">—</div>
       <div class="stat-card-lbl">Until licence expires</div>
-      <div style="margin-top:.75rem;font-size:13px;color:rgba(232,237,245,0.5);">Driver licence expires <strong style="color:#1d9e75;">November 2027</strong></div>
+      <div style="margin-top:.75rem;font-size:13px;color:rgba(232,237,245,0.5);">Driver licence expires <strong style="color:#1d9e75;" id="dash-lic-date">—</strong></div>
     </div>
   </div>
 
@@ -427,7 +427,7 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.5rem 3rem;display:f
       </div>
     </div>
     <div class="form-actions">
-      <button class="btn-save" onclick="saveSection('personal')">Save changes</button>
+      <button class="btn-save" onclick="savePersonal()">Save changes</button>
       <button class="btn-cancel" onclick="resetPersonal()">Cancel</button>
       <div class="save-msg" id="save-msg-personal">
         <svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,4" stroke="#1d9e75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -524,7 +524,7 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.5rem 3rem;display:f
     </div>
 
     <div class="form-actions">
-      <button class="btn-save" onclick="saveSection('vehicle')">Save changes</button>
+      <button class="btn-save" onclick="saveVehicle()">Save changes</button>
       <button class="btn-cancel">Cancel</button>
       <div class="save-msg" id="save-msg-vehicle">
         <svg viewBox="0 0 14 14" fill="none"><polyline points="2,7 5.5,10.5 12,4" stroke="#1d9e75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -705,7 +705,7 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.5rem 3rem;display:f
       <div class="replace-cta-price">
         <div class="amount">$12.98</div>
         <div class="sub">$7.99 sticker + $4.99 P&amp;H</div>
-        <a href="replacement.html" class="btn-replace">Order now →</a>
+        <a href="#" class="btn-replace" id="replacement-btn" onclick="orderReplacement(); return false;">Order now →</a>
       </div>
     </div>
   </div>
@@ -805,9 +805,196 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.5rem 3rem;display:f
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const MONTHS_FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+// ── Config ────────────────────────────────────────────────────────────────────
+const API          = 'https://regomate-backend-production.up.railway.app';
+const SUPABASE_URL = 'https://njchkgyorcwmkvdpzxue.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_4sSK0_NZ12nosdyYVeqlbA_fWD7rPAQ';
+const sb           = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ── Auth ──────────────────────────────────────────────────────────────────────
+async function getToken() {
+  const { data: { session } } = await sb.auth.getSession();
+  return session?.access_token || null;
+}
+
+async function apiFetch(path, options = {}) {
+  const token = await getToken();
+  const res = await fetch(`${API}${path}`, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+      ...(options.headers || {})
+    }
+  });
+  if (res.status === 401) {
+    window.location.href = 'login.html';
+    return null;
+  }
+  return res.json();
+}
+
+// ── Load account data ─────────────────────────────────────────────────────────
+let accountData = null;
+
+async function loadAccount() {
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) { window.location.href = 'login.html'; return; }
+
+    accountData = await apiFetch('/account/me');
+    if (!accountData) return;
+
+    populatePage(accountData);
+  } catch (err) {
+    console.error('Failed to load account:', err);
+    showToast('Failed to load account data');
+  }
+}
+
+function daysUntil(month, year) {
+  if (!month || !year) return null;
+  const exp = new Date(`${year}-${String(month).padStart(2,'0')}-01`);
+  exp.setMonth(exp.getMonth() + 1, 0); // last day of month
+  const diff = Math.ceil((exp - new Date()) / (1000 * 60 * 60 * 24));
+  return diff;
+}
+
+function populatePage(d) {
+  const vehicle = d.vehicles?.[0] || {};
+  const firstName = d.first_name || '';
+  const lastName  = d.last_name  || '';
+  const initials  = (firstName[0] || '') + (lastName[0] || '');
+
+  // Nav / hero
+  setText('nav-name',    `${firstName} ${lastName}`);
+  setText('nav-initials', initials);
+  setText('hero-name',    `${firstName} ${lastName}`);
+  setText('hero-initials', initials);
+  setText('hero-sub',     `Member since ${fmtMonthFull(d.subscribed_at?.slice(0,7))} · ${d.email}`);
+  setText('hero-plate',   vehicle.plate ? `Plate: ${vehicle.plate.toUpperCase()} · ${vehicle.state || ''}` : '');
+
+  // Stats
+  const regoDays = daysUntil(vehicle.rego_month, vehicle.rego_year);
+  const licDays  = daysUntil(vehicle.lic_month,  vehicle.lic_year);
+  setText('stat-rego-days', regoDays !== null ? `${regoDays} days` : '—');
+  setText('stat-lic-days',  licDays  !== null ? `${licDays} days`  : '—');
+  setText('stat-renewal',   d.plan === 'starter' ? '$9.99' : '$9.99');
+
+  // Dashboard cards
+  setText('dash-rego-days',  regoDays !== null ? `${regoDays} days` : '—');
+  setText('dash-lic-days',   licDays  !== null ? `${licDays} days`  : '—');
+  setText('dash-plate',      vehicle.plate?.toUpperCase() || '—');
+  setText('dash-rego-date',  vehicle.rego_month ? `${MONTHS_FULL[vehicle.rego_month-1]} ${vehicle.rego_year}` : '—');
+  setText('dash-lic-date',   vehicle.lic_month  ? `${MONTHS_FULL[vehicle.lic_month-1]}  ${vehicle.lic_year}`  : '—');
+
+  // Personal form
+  setVal('p-first',   d.first_name   || '');
+  setVal('p-last',    d.last_name    || '');
+  setVal('p-email',   d.email        || '');
+  setVal('p-mobile',  d.mobile       || '');
+  setVal('p-address', d.address1     || '');
+  setVal('p-suburb',  d.suburb       || '');
+  setVal('p-state',   d.state        || '');
+  setVal('p-postcode',d.postcode     || '');
+
+  // Vehicle form
+  setVal('v-plate', vehicle.plate || '');
+  setVal('v-state', vehicle.state || '');
+  if (vehicle.rego_month && vehicle.rego_year)
+    setVal('v-rego', `${vehicle.rego_year}-${String(vehicle.rego_month).padStart(2,'0')}`);
+  if (vehicle.lic_month && vehicle.lic_year)
+    setVal('v-lic',  `${vehicle.lic_year}-${String(vehicle.lic_month).padStart(2,'0')}`);
+
+  // Sticker preview
+  setText('vp-plate', vehicle.plate?.toUpperCase() || 'ABC 123');
+  setText('vp-state', vehicle.state || 'QLD');
+  setText('vp-rego',  vehicle.rego_month ? `${MONTHS[vehicle.rego_month-1]} ${vehicle.rego_year}` : '—');
+  setText('vp-lic',   vehicle.lic_month  ? `${MONTHS[vehicle.lic_month-1]} ${vehicle.lic_year}`   : '—');
+  setText('vp-next',  vehicle.rego_month ? `${MONTHS_FULL[vehicle.rego_month-1]} ${vehicle.rego_year}` : '—');
+
+  // SMS toggles
+  setChecked('sms-rego',       d.sms_rego       !== false);
+  setChecked('sms-licence',    d.sms_licence     !== false);
+  setChecked('sms-marketing',  d.sms_marketing   !== false);
+  updateSmsStatus();
+}
+
+function setText(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+function setVal(id, val)  { const el = document.getElementById(id); if (el) el.value = val; }
+function setChecked(id, val) { const el = document.getElementById(id); if (el) el.checked = val; }
+
+// ── Save personal ─────────────────────────────────────────────────────────────
+async function savePersonal() {
+  const body = {
+    first_name: document.getElementById('p-first')?.value,
+    last_name:  document.getElementById('p-last')?.value,
+    mobile:     document.getElementById('p-mobile')?.value,
+    address1:   document.getElementById('p-address')?.value,
+    suburb:     document.getElementById('p-suburb')?.value,
+    state:      document.getElementById('p-state')?.value,
+    postcode:   document.getElementById('p-postcode')?.value,
+  };
+  const result = await apiFetch('/account/personal', { method: 'PATCH', body: JSON.stringify(body) });
+  if (result) showToast('Personal details saved');
+}
+
+// ── Save vehicle ──────────────────────────────────────────────────────────────
+async function saveVehicle() {
+  const regoVal = document.getElementById('v-rego')?.value;
+  const licVal  = document.getElementById('v-lic')?.value;
+  const body = {
+    plate:      document.getElementById('v-plate')?.value,
+    state:      document.getElementById('v-state')?.value,
+    rego_month: regoVal ? parseInt(regoVal.split('-')[1]) : null,
+    rego_year:  regoVal ? parseInt(regoVal.split('-')[0]) : null,
+    lic_month:  licVal  ? parseInt(licVal.split('-')[1])  : null,
+    lic_year:   licVal  ? parseInt(licVal.split('-')[0])  : null,
+  };
+  const result = await apiFetch('/account/vehicle', { method: 'PATCH', body: JSON.stringify(body) });
+  if (result) { updateVehiclePreview(); showToast('Vehicle details saved — SMS reminders updated'); }
+}
+
+// ── Save SMS prefs ────────────────────────────────────────────────────────────
+async function saveSms() {
+  const body = {
+    sms_rego:      document.getElementById('sms-rego')?.checked,
+    sms_licence:   document.getElementById('sms-licence')?.checked,
+    sms_marketing: document.getElementById('sms-marketing')?.checked,
+  };
+  const result = await apiFetch('/account/sms', { method: 'PATCH', body: JSON.stringify(body) });
+  if (result) showToast('SMS preferences saved');
+}
+
+// ── Logout ────────────────────────────────────────────────────────────────────
+async function logout() {
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+// ── Replacement sticker ───────────────────────────────────────────────────────
+async function orderReplacement() {
+  const btn = document.getElementById('replacement-btn');
+  if (btn) { btn.textContent = 'Redirecting…'; btn.disabled = true; }
+  const { data: { session } } = await sb.auth.getSession();
+  const result = await fetch(`${API}/checkout/create-session`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      plan: 'replacement',
+      customerEmail: session?.user?.email,
+    })
+  }).then(r => r.json());
+  if (result.url) window.location.href = result.url;
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+loadAccount();
 
 // ── Tab switching ─────────────────────────────────────────────────────────────
 function showTab(id, btn) {
@@ -815,9 +1002,6 @@ function showTab(id, btn) {
   document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
   document.getElementById("tab-" + id).classList.add("active");
   if (btn) btn.classList.add("active");
-  else document.querySelectorAll(".tab-btn").forEach(b => {
-    if (b.textContent.toLowerCase().includes(id)) b.classList.add("active");
-  });
 }
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
@@ -828,40 +1012,15 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove("show"), 3000);
 }
 
-// ── Save sections ─────────────────────────────────────────────────────────────
-function saveSection(section) {
-  const msg = document.getElementById("save-msg-" + section);
-  msg.classList.add("show");
-  setTimeout(() => msg.classList.remove("show"), 3000);
-  showToast(section === "vehicle" ? "Vehicle details saved — SMS reminders updated" : "Changes saved successfully");
-}
-
-function resetPersonal() {
-  document.getElementById("p-first").value   = "James";
-  document.getElementById("p-last").value    = "Hartley";
-  document.getElementById("p-email").value   = "james@example.com";
-  document.getElementById("p-mobile").value  = "0412 345 678";
-  document.getElementById("p-address").value = "14 Acacia Ave, Brisbane QLD 4000";
-}
-
-// ── Vehicle preview ───────────────────────────────────────────────────────────
-function fmtMonth(val) {
-  if (!val) return "—";
-  const [y, m] = val.split("-");
-  return MONTHS[parseInt(m) - 1] + " " + y;
-}
-function fmtMonthFull(val) {
-  if (!val) return "—";
-  const [y, m] = val.split("-");
-  return MONTHS_FULL[parseInt(m) - 1] + " " + y;
-}
-
+// ── Vehicle preview (live update while editing) ───────────────────────────────
 function updateVehiclePreview() {
   const plate = (document.getElementById("v-plate")?.value || "").toUpperCase();
   const state = document.getElementById("v-state")?.value || "";
-  const rego  = fmtMonth(document.getElementById("v-rego")?.value);
-  const lic   = fmtMonth(document.getElementById("v-lic")?.value);
-  const regoF = fmtMonthFull(document.getElementById("v-rego")?.value);
+  const regoVal = document.getElementById("v-rego")?.value;
+  const licVal  = document.getElementById("v-lic")?.value;
+  const rego  = regoVal ? MONTHS[parseInt(regoVal.split('-')[1])-1] + ' ' + regoVal.split('-')[0] : '—';
+  const lic   = licVal  ? MONTHS[parseInt(licVal.split('-')[1])-1]  + ' ' + licVal.split('-')[0]  : '—';
+  const regoF = regoVal ? MONTHS_FULL[parseInt(regoVal.split('-')[1])-1] + ' ' + regoVal.split('-')[0] : '—';
   setText("vp-plate", plate);
   setText("vp-state", state);
   setText("vp-rego",  rego);
@@ -869,43 +1028,37 @@ function updateVehiclePreview() {
   setText("vp-next",  regoF);
 }
 
-function setText(id, val) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = val;
-}
-
 // ── SMS opt-out / opt-in ──────────────────────────────────────────────────────
-let smsActive = true;
-
 function optOutAll() {
   document.querySelectorAll("#tab-sms .toggle input").forEach(cb => cb.checked = false);
-  smsActive = false;
   updateSmsStatus();
-  showToast("All SMS reminders paused — you can re-enable anytime");
+  saveSms();
+  showToast("All SMS reminders paused");
 }
 
 function optInAll() {
   document.querySelectorAll("#tab-sms .toggle input").forEach(cb => cb.checked = true);
-  smsActive = true;
   updateSmsStatus();
+  saveSms();
   showToast("SMS reminders resumed");
 }
 
 function updateSmsStatus() {
-  const anyOn = [...document.querySelectorAll("#tab-sms .toggle input")].some(cb => cb.checked);
-  const bar   = document.getElementById("sms-status-bar");
+  const anyOn  = [...document.querySelectorAll("#tab-sms .toggle input")].some(cb => cb.checked);
+  const bar    = document.getElementById("sms-status-bar");
   const outBtn = document.getElementById("opt-out-btn");
   const inBtn  = document.getElementById("opt-in-btn");
+  if (!bar) return;
   if (anyOn) {
     bar.className = "sms-status-bar active";
-    bar.innerHTML = "<strong>Reminders are active</strong> — we&#39;ll SMS you before both your rego and licence expiry dates. Reply <strong>STOP</strong> to any message to opt out instantly.";
-    outBtn.style.display = "block";
-    inBtn.style.display  = "none";
+    bar.innerHTML = "<strong>Reminders are active</strong> — we'll SMS you before both your rego and licence expiry dates. Reply <strong>STOP</strong> to any message to opt out instantly.";
+    if (outBtn) outBtn.style.display = "block";
+    if (inBtn)  inBtn.style.display  = "none";
   } else {
     bar.className = "sms-status-bar paused";
-    bar.innerHTML = "<strong>Reminders are paused</strong> — you won&#39;t receive any SMS alerts. Turn individual reminders back on above, or click Resume below.";
-    outBtn.style.display = "none";
-    inBtn.style.display  = "block";
+    bar.innerHTML = "<strong>Reminders are paused</strong> — you won't receive any SMS alerts. Turn individual reminders back on above, or click Resume below.";
+    if (outBtn) outBtn.style.display = "none";
+    if (inBtn)  inBtn.style.display  = "block";
   }
 }
 
@@ -927,28 +1080,25 @@ function checkStrength(val) {
     { w:"100%", bg:"#1d9e75",     txt:"Strong password ✓" },
   ];
   const l = levels[Math.min(score, 4)];
-  bar.style.width      = l.w;
-  bar.style.background = l.bg;
-  hint.textContent     = l.txt;
-  hint.style.color     = l.bg === "transparent" ? "rgba(232,237,245,0.35)" : l.bg;
+  if (bar) { bar.style.width = l.w; bar.style.background = l.bg; }
+  if (hint) { hint.textContent = l.txt; hint.style.color = l.bg === "transparent" ? "rgba(232,237,245,0.35)" : l.bg; }
 }
 
-function changePassword() {
+async function changePassword() {
   const cur  = document.getElementById("pw-current").value;
   const nw   = document.getElementById("pw-new").value;
   const conf = document.getElementById("pw-confirm").value;
-  if (!cur) { alert("Please enter your current password."); return; }
-  if (nw.length < 8) { alert("New password must be at least 8 characters."); return; }
-  if (nw !== conf) { alert("New passwords don't match."); return; }
-  document.getElementById("save-msg-password").classList.add("show");
-  setTimeout(() => document.getElementById("save-msg-password").classList.remove("show"), 3000);
+  if (!cur) { showToast("Please enter your current password."); return; }
+  if (nw.length < 8) { showToast("New password must be at least 8 characters."); return; }
+  if (nw !== conf) { showToast("New passwords don't match."); return; }
+
+  const { error } = await sb.auth.updateUser({ password: nw });
+  if (error) { showToast("Error: " + error.message); return; }
+
   showToast("Password updated successfully");
   ["pw-current","pw-new","pw-confirm"].forEach(id => document.getElementById(id).value = "");
   checkStrength("");
 }
-
-// ── Init ──────────────────────────────────────────────────────────────────────
-updateVehiclePreview();
 </script>
 </body>
 </html>
