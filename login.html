@@ -4,87 +4,71 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign In — RegoMate</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Barlow',sans-serif;background:#0a1628;color:#e8edf5;min-height:100vh;display:flex;flex-direction:column;}
-
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a1628;color:#e8edf5;min-height:100vh;display:flex;flex-direction:column;}
+a{color:inherit;text-decoration:none;}
 nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:68px;border-bottom:1px solid rgba(255,255,255,0.08);background:rgba(10,22,40,0.97);}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.logo-text{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:#fff;}
-.logo-text span{color:#e8a020;}
-.nav-link{color:rgba(232,237,245,0.5);font-size:13px;text-decoration:none;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-text{font-size:1.2rem;font-weight:800;letter-spacing:2px;color:#e8a020;}
+.nav-link{color:rgba(232,237,245,0.5);font-size:13px;}
 .nav-link:hover{color:#fff;}
-
 .page{flex:1;display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem;}
-
 .box{background:#111e35;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:48px;width:100%;max-width:420px;}
-
 .box-logo{display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;}
 .box-logo-mark{width:52px;height:52px;background:#e8a020;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;}
-
-h1{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;text-align:center;margin-bottom:6px;}
+h1{font-size:1.75rem;font-weight:800;color:#fff;text-align:center;margin-bottom:6px;}
 .sub{font-size:14px;color:rgba(232,237,245,0.45);text-align:center;margin-bottom:2rem;line-height:1.5;}
-
-/* Tabs */
 .mode-tabs{display:flex;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:3px;margin-bottom:1.75rem;}
 .mode-tab{flex:1;padding:8px;text-align:center;font-size:13px;font-weight:600;color:rgba(232,237,245,0.4);cursor:pointer;border-radius:6px;transition:all .2s;}
 .mode-tab.active{background:#e8a020;color:#0a1628;}
-
 .fg{margin-bottom:1rem;}
 label{display:block;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(232,237,245,0.4);margin-bottom:5px;}
-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#e8edf5;font-family:'Barlow',sans-serif;font-size:14px;padding:11px 14px;transition:border-color .2s;outline:none;}
+input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#e8edf5;font-size:14px;padding:11px 14px;transition:border-color .2s;outline:none;}
 input::placeholder{color:rgba(232,237,245,0.2);}
 input:focus{border-color:rgba(232,160,32,0.55);}
-
-.btn{width:100%;background:#e8a020;color:#0a1628;border:none;border-radius:8px;padding:13px;font-family:'Barlow',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;margin-top:.5rem;}
+.btn{width:100%;background:#e8a020;color:#0a1628;border:none;border-radius:8px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;margin-top:.5rem;}
 .btn:hover{background:#f0b030;}
 .btn:disabled{opacity:.6;cursor:not-allowed;}
-
 .divider{display:flex;align-items:center;gap:12px;margin:1.25rem 0;}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.08);}
 .divider span{font-size:12px;color:rgba(232,237,245,0.3);}
-
-.btn-magic{width:100%;background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(232,237,245,0.7);border-radius:8px;padding:12px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-magic{width:100%;background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(232,237,245,0.7);border-radius:8px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;}
 .btn-magic:hover{border-color:rgba(255,255,255,0.35);color:#fff;}
-
 .error{background:rgba(248,81,73,0.1);border:1px solid rgba(248,81,73,0.3);border-radius:8px;padding:10px 14px;font-size:13px;color:#f85149;margin-bottom:1rem;display:none;}
 .success{background:rgba(29,158,117,0.1);border:1px solid rgba(29,158,117,0.3);border-radius:8px;padding:10px 14px;font-size:13px;color:#1d9e75;margin-bottom:1rem;display:none;}
-
 .fine{font-size:12px;color:rgba(232,237,245,0.3);text-align:center;margin-top:1.25rem;line-height:1.6;}
-.fine a{color:#e8a020;text-decoration:none;}
-
-footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(232,237,245,0.3);}
+.fine a{color:#e8a020;}
+footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:rgba(232,237,245,0.3);}
 .footer-links{display:flex;gap:1.5rem;}
-.footer-links a{color:inherit;text-decoration:none;}
 .footer-links a:hover{color:rgba(232,237,245,0.6);}
+@media(max-width:480px){nav{padding:0 1.25rem;}.box{padding:32px 24px;}footer{flex-direction:column;text-align:center;}}
 </style>
 </head>
 <body>
-
 <nav>
-  <a class="logo" href="index.html">
-    <div class="logo-text">REGO<span>MATE</span></div>
+  <a class="logo" href="/">
+    <svg viewBox="0 0 40 40" fill="none" width="36" height="36">
+      <rect width="40" height="40" rx="8" fill="#1a2733"/>
+      <path d="M20 6L8 14v12l12 8 12-8V14L20 6z" stroke="#e8a020" stroke-width="2" fill="none"/>
+      <text x="20" y="24" text-anchor="middle" font-size="11" font-weight="900" fill="#e8a020" font-family="Arial">RM</text>
+    </svg>
+    <span class="logo-text">REGOMATE</span>
   </a>
-  <a class="nav-link" href="index.html">← Back to home</a>
+  <a class="nav-link" href="/">← Back to home</a>
 </nav>
 
 <div class="page">
   <div class="box">
-    <div class="box-logo">
-      <div class="box-logo-mark">🚗</div>
-    </div>
+    <div class="box-logo"><div class="box-logo-mark">🚗</div></div>
     <h1>Welcome back</h1>
     <p class="sub">Sign in to manage your rego reminders,<br>vehicle details and SMS preferences.</p>
 
-    <!-- Mode tabs -->
     <div class="mode-tabs">
-      <div class="mode-tab active" onclick="setMode('password', this)">Password</div>
-      <div class="mode-tab" onclick="setMode('magic', this)">Magic link</div>
+      <div class="mode-tab active" onclick="setMode('password',this)">Password</div>
+      <div class="mode-tab" onclick="setMode('magic',this)">Magic link</div>
     </div>
 
-    <!-- Error / success messages -->
     <div class="error" id="error-msg"></div>
     <div class="success" id="success-msg"></div>
 
@@ -92,186 +76,154 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.25rem 2.5rem;displa
     <div id="mode-password">
       <div class="fg">
         <label>Email address</label>
-        <input type="email" id="email" placeholder="you@example.com" />
+        <input type="email" id="email" placeholder="you@example.com">
       </div>
       <div class="fg">
         <label>Password</label>
-        <input type="password" id="password" placeholder="Your password" />
+        <input type="password" id="password" placeholder="Your password">
       </div>
       <button class="btn" id="login-btn" onclick="loginWithPassword()">Sign in</button>
-
       <div class="divider"><span>or</span></div>
-
-      <button class="btn-magic" onclick="setMode('magic', document.querySelectorAll('.mode-tab')[1]); sendMagicLink()">
+      <button class="btn-magic" onclick="setMode('magic',document.querySelectorAll('.mode-tab')[1]);sendMagicLink()">
         📧 Send me a magic link instead
       </button>
-
       <p class="fine">
-        Forgot your password? <a href="#" onclick="showForgot(); return false;">Reset it here</a><br>
-        Don't have an account yet? <a href="index.html#signup">Sign up →</a>
+        Forgot your password? <a href="#" onclick="showForgot();return false;">Reset it here</a><br>
+        Don't have an account yet? <a href="/#signup">Sign up →</a>
       </p>
     </div>
 
-    <!-- Magic link login -->
-    <div id="mode-magic" style="display:none;">
+    <!-- Magic link -->
+    <div id="mode-magic" style="display:none">
       <div class="fg">
         <label>Email address</label>
-        <input type="email" id="magic-email" placeholder="you@example.com" />
+        <input type="email" id="magic-email" placeholder="you@example.com">
       </div>
       <button class="btn" id="magic-btn" onclick="sendMagicLink()">Send magic link</button>
       <p class="fine">We'll email you a one-click sign-in link. No password needed.</p>
     </div>
 
     <!-- Forgot password -->
-    <div id="mode-forgot" style="display:none;">
-      <p style="font-size:14px;color:rgba(232,237,245,0.6);margin-bottom:1.25rem;line-height:1.6;">Enter your email and we'll send you a link to reset your password.</p>
+    <div id="mode-forgot" style="display:none">
+      <p style="font-size:14px;color:rgba(232,237,245,0.6);margin-bottom:1.25rem;line-height:1.6;">
+        Enter your email and we'll send you a link to reset your password.
+      </p>
       <div class="fg">
         <label>Email address</label>
-        <input type="email" id="forgot-email" placeholder="you@example.com" />
+        <input type="email" id="forgot-email" placeholder="you@example.com">
       </div>
       <button class="btn" onclick="sendReset()">Send reset link</button>
-      <p class="fine"><a href="#" onclick="setMode('password', document.querySelectorAll('.mode-tab')[0]); return false;">← Back to sign in</a></p>
+      <p class="fine"><a href="#" onclick="setMode('password',document.querySelectorAll('.mode-tab')[0]);return false;">← Back to sign in</a></p>
     </div>
-
   </div>
 </div>
 
 <footer>
   <div>© 2026 Rego Mate Aus · ABN 88 726 510 577 · All prices include GST</div>
   <div class="footer-links">
-    <a href="terms.html">Privacy & Terms</a>
-    <a href="faq.html">Help</a>
+    <a href="/terms.html">Privacy &amp; Terms</a>
+    <a href="/faq.html">Help</a>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+// Supabase anon key is safe to use client-side — Row Level Security controls access
 const SUPABASE_URL = 'https://njchkgyorcwmkvdpzxue.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_4sSK0_NZ12nosdyYVeqlbA_fWD7rPAQ';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const SUPABASE_ANON_KEY = 'sb_publishable_4sSK0_NZ12nosdyYVeqlbA_fWD7rPAQ';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ── Check if already logged in ────────────────────────────────────────────────
+// Redirect if already logged in
 (async () => {
   const { data: { session } } = await sb.auth.getSession();
-  if (session) window.location.href = 'account.html';
+  if (session) window.location.href = '/account.html';
 })();
 
-// ── Mode switching ────────────────────────────────────────────────────────────
 function setMode(mode, tabEl) {
   document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
   if (tabEl) tabEl.classList.add('active');
-  document.getElementById('mode-password').style.display = mode === 'password' ? 'block' : 'none';
-  document.getElementById('mode-magic').style.display    = mode === 'magic'    ? 'block' : 'none';
-  document.getElementById('mode-forgot').style.display   = mode === 'forgot'   ? 'block' : 'none';
+  document.getElementById('mode-password').style.display = mode === 'password' ? '' : 'none';
+  document.getElementById('mode-magic').style.display    = mode === 'magic'    ? '' : 'none';
+  document.getElementById('mode-forgot').style.display   = 'none';
   hideMessages();
 }
 
 function showForgot() {
   document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('mode-password').style.display = 'none';
-  document.getElementById('mode-magic').style.display    = 'none';
-  document.getElementById('mode-forgot').style.display   = 'block';
+  ['mode-password','mode-magic'].forEach(id => document.getElementById(id).style.display = 'none');
+  document.getElementById('mode-forgot').style.display = '';
   hideMessages();
 }
 
-// ── Messages ──────────────────────────────────────────────────────────────────
 function showError(msg) {
   const el = document.getElementById('error-msg');
-  el.textContent = msg;
-  el.style.display = 'block';
+  el.textContent = msg; el.style.display = '';
   document.getElementById('success-msg').style.display = 'none';
 }
-
 function showSuccess(msg) {
   const el = document.getElementById('success-msg');
-  el.textContent = msg;
-  el.style.display = 'block';
+  el.textContent = msg; el.style.display = '';
   document.getElementById('error-msg').style.display = 'none';
 }
-
 function hideMessages() {
-  document.getElementById('error-msg').style.display   = 'none';
+  document.getElementById('error-msg').style.display = 'none';
   document.getElementById('success-msg').style.display = 'none';
 }
 
-// ── Password login ────────────────────────────────────────────────────────────
 async function loginWithPassword() {
   const email    = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
   const btn      = document.getElementById('login-btn');
-
   if (!email || !password) { showError('Please enter your email and password.'); return; }
-
-  btn.textContent = 'Signing in…';
-  btn.disabled = true;
-  hideMessages();
-
+  btn.textContent = 'Signing in…'; btn.disabled = true; hideMessages();
   const { error } = await sb.auth.signInWithPassword({ email, password });
-
   if (error) {
     showError(error.message === 'Invalid login credentials'
-      ? 'Incorrect email or password. Try a magic link if you\'ve forgotten your password.'
+      ? "Incorrect email or password. Try a magic link if you've forgotten your password."
       : error.message);
-    btn.textContent = 'Sign in';
-    btn.disabled = false;
+    btn.textContent = 'Sign in'; btn.disabled = false;
     return;
   }
-
-  window.location.href = 'account.html';
+  window.location.href = '/account.html';
 }
 
-// Allow Enter key on password field
 document.getElementById('password')?.addEventListener('keydown', e => {
   if (e.key === 'Enter') loginWithPassword();
 });
 
-// ── Magic link ────────────────────────────────────────────────────────────────
 async function sendMagicLink() {
   const emailEl = document.getElementById('magic-email') || document.getElementById('email');
   const email   = emailEl?.value.trim();
   const btn     = document.getElementById('magic-btn');
-
   if (!email) { showError('Please enter your email address.'); return; }
-
   if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
   hideMessages();
-
   const { error } = await sb.auth.signInWithOtp({
     email,
     options: { emailRedirectTo: window.location.origin + '/account.html' }
   });
-
   if (error) {
     showError(error.message);
     if (btn) { btn.textContent = 'Send magic link'; btn.disabled = false; }
     return;
   }
-
   showSuccess('Magic link sent! Check your email and click the link to sign in.');
   if (btn) { btn.textContent = 'Send magic link'; btn.disabled = false; }
 }
 
-// ── Password reset ────────────────────────────────────────────────────────────
 async function sendReset() {
   const email = document.getElementById('forgot-email').value.trim();
   if (!email) { showError('Please enter your email address.'); return; }
-
   hideMessages();
-
   const { error } = await sb.auth.resetPasswordForEmail(email, {
     redirectTo: window.location.origin + '/account.html'
   });
-
   if (error) { showError(error.message); return; }
-
   showSuccess('Password reset email sent! Check your inbox.');
 }
 
-// ── Handle auth redirect (magic link / reset) ─────────────────────────────────
 sb.auth.onAuthStateChange((event, session) => {
-  if (event === 'SIGNED_IN' && session) {
-    window.location.href = 'account.html';
-  }
+  if (event === 'SIGNED_IN' && session) window.location.href = '/account.html';
 });
 </script>
 </body>
