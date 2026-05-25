@@ -4,34 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FAQ — RegoMate</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:"Barlow",sans-serif;background:#0a1628;color:#e8edf5;min-height:100vh;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a1628;color:#e8edf5;min-height:100vh;}
+a{color:inherit;text-decoration:none;}
 
-nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:76px;border-bottom:1px solid rgba(255,255,255,0.08);background:rgba(10,22,40,0.97);position:sticky;top:0;z-index:100;}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.logo img{width:52px;height:52px;object-fit:contain;}
-.logo-text{font-family:"Barlow Condensed",sans-serif;font-size:30px;font-weight:800;color:#fff;}
-.logo-text span{color:#e8a020;}
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:72px;border-bottom:1px solid rgba(255,255,255,0.08);background:rgba(10,22,40,0.97);position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-text{font-size:1.2rem;font-weight:800;letter-spacing:2px;color:#e8a020;}
 .nav-links{display:flex;gap:2rem;list-style:none;font-size:14px;font-weight:500;}
-.nav-links a{color:rgba(232,237,245,0.6);text-decoration:none;transition:color .2s;}
+.nav-links a{color:rgba(232,237,245,0.6);transition:color .2s;}
 .nav-links a:hover{color:#fff;}
-.nav-cta{background:#e8a020;color:#0a1628;border:none;padding:10px 22px;border-radius:6px;font-family:"Barlow",sans-serif;font-size:14px;font-weight:700;cursor:pointer;}
+.nav-cta{background:#e8a020;color:#0a1628;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:700;}
+.nav-cta:hover{background:#f0b030;}
 
+/* PAGE HERO */
 .page-hero{background:linear-gradient(135deg,#0f1f3d 0%,#0a1628 100%);border-bottom:1px solid rgba(255,255,255,0.07);padding:3.5rem 3rem 3rem;}
 .page-hero-inner{max-width:800px;margin:0 auto;}
-.back-link{display:inline-flex;align-items:center;gap:6px;color:rgba(232,237,245,0.4);font-size:13px;text-decoration:none;margin-bottom:1.25rem;transition:color .2s;}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:rgba(232,237,245,0.4);font-size:13px;margin-bottom:1.25rem;transition:color .2s;}
 .back-link:hover{color:#e8a020;}
-.page-hero h1{font-family:"Barlow Condensed",sans-serif;font-size:48px;font-weight:800;color:#fff;margin-bottom:.5rem;}
+.page-hero h1{font-size:2.8rem;font-weight:800;color:#fff;margin-bottom:.5rem;}
 .page-hero p{font-size:15px;color:rgba(232,237,245,0.5);line-height:1.7;}
 
+/* MAIN */
 .main{max-width:800px;margin:0 auto;padding:3rem;}
 
 /* SEARCH */
 .search-wrap{position:relative;margin-bottom:2.5rem;}
-.search-wrap input{width:100%;background:#111e35;border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#e8edf5;font-family:"Barlow",sans-serif;font-size:15px;padding:14px 16px 14px 48px;transition:border-color .2s;}
+.search-wrap input{width:100%;background:#111e35;border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#e8edf5;font-size:15px;padding:14px 16px 14px 48px;transition:border-color .2s;}
 .search-wrap input::placeholder{color:rgba(232,237,245,0.25);}
 .search-wrap input:focus{outline:none;border-color:rgba(232,160,32,0.5);}
 .search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:18px;color:rgba(232,237,245,0.3);}
@@ -39,28 +40,24 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5r
 
 /* CATEGORY PILLS */
 .cat-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;}
-.cat-pill{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(232,237,245,0.55);padding:7px 16px;border-radius:20px;font-family:"Barlow",sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+.cat-pill{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(232,237,245,0.55);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
 .cat-pill:hover{border-color:rgba(255,255,255,0.25);color:#fff;}
 .cat-pill.active{background:rgba(232,160,32,0.12);border-color:rgba(232,160,32,0.4);color:#e8a020;}
 
-/* FAQ SECTIONS */
+/* FAQ */
 .faq-section{margin-bottom:2.5rem;}
-.faq-section-title{font-family:"Barlow Condensed",sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:2px solid rgba(232,160,32,0.3);display:flex;align-items:center;gap:.75rem;}
-.faq-section-icon{font-size:20px;}
-
+.faq-section-title{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:2px solid rgba(232,160,32,0.3);display:flex;align-items:center;gap:.75rem;}
 .faq-item{border-bottom:1px solid rgba(255,255,255,0.06);}
 .faq-item:last-child{border-bottom:none;}
 .faq-q{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 0;cursor:pointer;font-size:15px;font-weight:600;color:#fff;transition:color .2s;line-height:1.5;}
 .faq-q:hover{color:#e8a020;}
-.faq-arrow{font-size:20px;color:rgba(232,237,245,0.3);transition:transform .25s;flex-shrink:0;font-weight:400;}
+.faq-arrow{font-size:20px;color:rgba(232,237,245,0.3);transition:transform .25s;flex-shrink:0;}
 .faq-item.open .faq-arrow{transform:rotate(90deg);color:#e8a020;}
 .faq-a{display:none;font-size:14px;color:rgba(232,237,245,0.6);line-height:1.8;padding-bottom:1rem;}
 .faq-item.open .faq-a{display:block;}
-.faq-a a{color:#e8a020;text-decoration:none;}
+.faq-a a{color:#e8a020;}
 .faq-a a:hover{text-decoration:underline;}
 .faq-a strong{color:rgba(232,237,245,0.85);}
-
-/* HIGHLIGHT BOX inside answers */
 .faq-highlight{background:rgba(232,160,32,0.07);border-left:3px solid #e8a020;border-radius:0 7px 7px 0;padding:10px 14px;margin:10px 0;font-size:13px;color:rgba(232,237,245,0.65);line-height:1.6;}
 .faq-highlight strong{color:#e8a020;}
 
@@ -72,21 +69,20 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5r
 
 /* CTA */
 .cta-bar{background:#111e35;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:2rem;text-align:center;margin-top:3rem;}
-.cta-bar h3{font-family:"Barlow Condensed",sans-serif;font-size:28px;font-weight:800;color:#fff;margin-bottom:.4rem;}
+.cta-bar h3{font-size:1.7rem;font-weight:800;color:#fff;margin-bottom:.4rem;}
 .cta-bar p{font-size:14px;color:rgba(232,237,245,0.45);margin-bottom:1.25rem;line-height:1.6;}
 .cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
-.btn-gold{display:inline-block;background:#e8a020;color:#0a1628;padding:12px 28px;border-radius:7px;font-family:"Barlow",sans-serif;font-size:15px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:background .2s;}
+.btn-gold{display:inline-block;background:#e8a020;color:#0a1628;padding:12px 28px;border-radius:7px;font-size:15px;font-weight:700;}
 .btn-gold:hover{background:#f0b030;}
-.btn-outline{display:inline-block;background:transparent;color:rgba(232,237,245,0.6);border:1px solid rgba(255,255,255,0.15);padding:12px 24px;border-radius:7px;font-family:"Barlow",sans-serif;font-size:15px;font-weight:500;text-decoration:none;cursor:pointer;transition:all .2s;}
+.btn-outline{display:inline-block;background:transparent;color:rgba(232,237,245,0.6);border:1px solid rgba(255,255,255,0.15);padding:12px 24px;border-radius:7px;font-size:15px;font-weight:500;transition:all .2s;}
 .btn-outline:hover{border-color:rgba(255,255,255,0.35);color:#fff;}
 
-footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(232,237,245,0.3);margin-top:2rem;}
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:12px;color:rgba(232,237,245,0.3);margin-top:2rem;}
 .footer-logo{display:flex;align-items:center;gap:8px;}
-.footer-logo img{width:24px;height:24px;object-fit:contain;opacity:.5;}
-.footer-logo-text{font-family:"Barlow Condensed",sans-serif;font-size:16px;font-weight:800;color:rgba(255,255,255,0.3);}
+.footer-logo-text{font-size:1rem;font-weight:800;color:rgba(255,255,255,0.3);}
 .footer-logo-text span{color:rgba(232,160,32,0.5);}
-.footer-links{display:flex;gap:1.5rem;}
-.footer-links a{color:inherit;text-decoration:none;}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
 .footer-links a:hover{color:rgba(232,237,245,0.6);}
 
 @media(max-width:600px){
@@ -95,338 +91,250 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.5rem 3rem;display:f
   .page-hero{padding:2.5rem 1.25rem;}
   .main{padding:2rem 1.25rem;}
   footer{flex-direction:column;gap:.75rem;text-align:center;padding:1.25rem;}
-  .cta-btns{flex-direction:column;align-items:center;}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="logo" href="index.html">
-    <img src="data:image/png;base64,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" alt="RegoMate">
-    <div class="logo-text">REGO<span>MATE</span></div>
+  <a class="logo" href="/">
+    <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+      <rect width="40" height="40" rx="8" fill="#1a2733"/>
+      <path d="M20 6L8 14v12l12 8 12-8V14L20 6z" stroke="#e8a020" stroke-width="2" fill="none"/>
+      <text x="20" y="24" text-anchor="middle" font-size="11" font-weight="900" fill="#e8a020" font-family="Arial">RM</text>
+    </svg>
+    <span class="logo-text">REGOMATE</span>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html#how">How it works</a></li>
-    <li><a href="index.html#sms">SMS reminders</a></li>
-    <li><a href="index.html#pricing">Pricing</a></li>
-    <li><a href="faq.html" style="color:#e8a020;">FAQ</a></li>
-    <li><a href="terms.html">T&amp;Cs</a></li>
+    <li><a href="/#how">How it works</a></li>
+    <li><a href="/#sms">SMS reminders</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="/#contact-section">Contact</a></li>
+    <li><a href="/terms.html">T&amp;Cs &amp; Privacy</a></li>
   </ul>
-  <button class="nav-cta" onclick="window.location.href='index.html'">Get Started</button>
+  <a href="/" class="nav-cta">Get Started</a>
 </nav>
 
 <div class="page-hero">
   <div class="page-hero-inner">
-    <a class="back-link" href="index.html">&#8592; Back to RegoMate</a>
-    <h1>Frequently asked questions</h1>
-    <p>Everything you need to know about RegoMate. Can&#39;t find your answer? Email us at <a href="mailto:support@regomate.com" style="color:#e8a020;">support@regomate.com</a></p>
+    <a class="back-link" href="/">← Back to RegoMate</a>
+    <h1>❓ Frequently Asked Questions</h1>
+    <p>Everything you need to know about RegoMate. Can't find your answer? <a href="mailto:support@regomate.com" style="color:#e8a020;">Contact us</a>.</p>
   </div>
 </div>
 
 <div class="main">
-
-  <!-- SEARCH -->
   <div class="search-wrap">
-    <span class="search-icon">&#128269;</span>
-    <input type="text" id="faq-search" placeholder="Search questions..." oninput="searchFaq(this.value)">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="faq-search" placeholder="Search questions…" oninput="filterFAQ()">
     <span class="search-count" id="search-count"></span>
   </div>
 
-  <!-- CATEGORY PILLS -->
   <div class="cat-pills">
-    <button class="cat-pill active" onclick="filterCat('all',this)">All questions</button>
-    <button class="cat-pill" onclick="filterCat('service',this)">The service</button>
-    <button class="cat-pill" onclick="filterCat('sticker',this)">Sticker &amp; delivery</button>
-    <button class="cat-pill" onclick="filterCat('sms',this)">SMS reminders</button>
-    <button class="cat-pill" onclick="filterCat('account',this)">Account &amp; billing</button>
-    <button class="cat-pill" onclick="filterCat('install',this)">Installation</button>
+    <span class="cat-pill active" onclick="filterCat('all',this)">All</span>
+    <span class="cat-pill" onclick="filterCat('service',this)">📦 Service</span>
+    <span class="cat-pill" onclick="filterCat('sms',this)">📱 SMS</span>
+    <span class="cat-pill" onclick="filterCat('sticker',this)">🏷️ Sticker</span>
+    <span class="cat-pill" onclick="filterCat('billing',this)">💳 Billing</span>
+    <span class="cat-pill" onclick="filterCat('account',this)">👤 Account</span>
   </div>
 
-  <!-- NO RESULTS -->
-  <div class="no-results" id="no-results">
-    <div class="no-results-icon">&#128269;</div>
-    <h3>No results found</h3>
-    <p>Try a different search term, or <a href="mailto:support@regomate.com" style="color:#e8a020;">email us</a> and we&#39;ll help.</p>
-  </div>
-
-  <!-- ── THE SERVICE ── -->
+  <!-- Service -->
   <div class="faq-section" data-cat="service">
-    <div class="faq-section-title"><span class="faq-section-icon">&#127991;</span>The service</div>
-
-    <div class="faq-item" data-cat="service">
-      <div class="faq-q" onclick="toggleFaq(this)">What exactly is RegoMate? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">RegoMate is a vehicle registration reminder service. When you sign up, we post you a personalised windscreen sticker printed with your rego plate, rego expiry date, and driver&#39;s licence expiry date. We also send you automatic SMS reminders before each expiry date so you never get caught out with an expired rego or licence.</div>
+    <div class="faq-section-title"><span>📦</span> About the Service</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What is RegoMate? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">RegoMate is an Australian reminder service that helps you never miss your vehicle registration or driver's licence renewal. You get a personalised windscreen sticker in your first year, plus automatic SMS alerts before your expiry dates.</div>
     </div>
-
-    <div class="faq-item" data-cat="service">
-      <div class="faq-q" onclick="toggleFaq(this)">Is RegoMate affiliated with the government or my state&#39;s transport authority? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">No. RegoMate is a private service and is not affiliated with any Australian government, transport authority, or vehicle registration agency. We do not process or renew registrations on your behalf — we are purely a reminder and convenience tool. You are still responsible for renewing your rego and licence through your state&#39;s transport authority.</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Is RegoMate a government service? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">No. RegoMate is a private reminder service and has no affiliation with any government agency. We do not process or renew registrations — we simply remind you when action is needed. You still need to renew your rego and licence through the official channels (e.g. your state's transport department).</div>
     </div>
-
-    <div class="faq-item" data-cat="service">
-      <div class="faq-q" onclick="toggleFaq(this)">Does RegoMate automatically check my rego dates with the government? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">No — RegoMate relies entirely on the expiry dates you provide when you sign up. We do not connect to any government database. This means it&#39;s important to enter your dates accurately, and to update them in your account if they change — for example if you renew early or get a new licence.</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Which states does RegoMate cover? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">RegoMate works in all Australian states and territories — QLD, NSW, VIC, SA, WA, TAS, ACT, and NT. SMS reminders are based on the expiry dates you provide, so they work regardless of your state.</div>
     </div>
-
-    <div class="faq-item" data-cat="service">
-      <div class="faq-q" onclick="toggleFaq(this)">What states does RegoMate work in? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">RegoMate works in all Australian states and territories — QLD, NSW, VIC, SA, WA, TAS, ACT, and NT. We post stickers to any Australian address and SMS reminders go to any Australian mobile number.</div>
-    </div>
-
-    <div class="faq-item" data-cat="service">
-      <div class="faq-q" onclick="toggleFaq(this)">Can I add more than one vehicle? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Currently each RegoMate subscription covers one vehicle. If you have multiple vehicles, you can sign up for a separate subscription for each one. We&#39;re working on a multi-vehicle account feature — stay tuned.</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Can I add multiple vehicles? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Yes! You can add extra stickers for a partner, friend, or second vehicle at signup or anytime from your account. Each extra sticker is $9.99 and includes its own SMS reminders. We post everything together — <strong>no extra postage</strong> for up to 10 stickers in one order.</div>
     </div>
   </div>
 
-  <!-- ── STICKER & DELIVERY ── -->
-  <div class="faq-section" data-cat="sticker">
-    <div class="faq-section-title"><span class="faq-section-icon">&#128230;</span>Sticker &amp; delivery</div>
-
-    <div class="faq-item" data-cat="sticker">
-      <div class="faq-q" onclick="toggleFaq(this)">What comes in the post? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Your RegoMate pack contains two items:
-        <br><br>
-        <strong>1. Your personalised sticker</strong> — printed with your rego plate, rego expiry date, and driver&#39;s licence expiry date.<br>
-        <strong>2. An alcohol wipe</strong> — to clean your windscreen surface before applying the sticker so it bonds properly and lasts.
-        <div class="faq-highlight"><strong>Tip:</strong> Read our <a href="install.html">installation guide</a> before you apply the sticker for the best result.</div>
-      </div>
-    </div>
-
-    <div class="faq-item" data-cat="sticker">
-      <div class="faq-q" onclick="toggleFaq(this)">How long does delivery take? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Your sticker is printed and posted within <strong>3&#8211;5 business days</strong> of your subscription being confirmed. Delivery is via Australia Post. Allow an additional 2&#8211;5 business days for delivery depending on your location.</div>
-    </div>
-
-    <div class="faq-item" data-cat="sticker">
-      <div class="faq-q" onclick="toggleFaq(this)">Do I get a sticker every year? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">No — your physical sticker is included in your <strong>first year only</strong> ($14.99). From year two onwards your subscription is $9.99/yr and covers SMS reminders only. Your sticker is designed to stay on your windscreen year after year.
-        <br><br>
-        You can order a <a href="replacement.html">replacement sticker</a> at any time for $7.99 + $4.99 postage — for example if your sticker is damaged, lost, or your details have changed.</div>
-    </div>
-
-    <div class="faq-item" data-cat="sticker">
-      <div class="faq-q" onclick="toggleFaq(this)">Where should I put the sticker on my car? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">The sticker is designed to go on the <strong>inside of your windscreen only</strong> — not on the outside. Most people place it in the top corner on the driver&#39;s side, near where the registration label sits. It should be somewhere easy to see as a reminder but outside your direct line of sight while driving.
-        <div class="faq-highlight">Make sure your windscreen is <strong>cool and at room temperature</strong> before applying — a hot windscreen prevents the adhesive bonding correctly. See our <a href="install.html">installation guide</a> for full instructions.</div>
-      </div>
-    </div>
-
-    <div class="faq-item" data-cat="sticker">
-      <div class="faq-q" onclick="toggleFaq(this)">My sticker details are wrong. What do I do? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Log in to your <a href="account.html">RegoMate account</a> and update your rego plate, rego expiry, or licence expiry in the Vehicle details section. Your SMS reminders will automatically use the corrected dates. You can then order a <a href="replacement.html">replacement sticker</a> with the correct details for $12.98 (sticker + postage).</div>
-    </div>
-
-    <div class="faq-item" data-cat="sticker">
-      <div class="faq-q" onclick="toggleFaq(this)">My sticker arrived damaged or didn&#39;t arrive. What happens? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Contact us at <a href="mailto:support@regomate.com">support@regomate.com</a> with your order number and a photo of the damage. We&#39;ll arrange a replacement at no charge. If your sticker hasn&#39;t arrived within 10 business days of dispatch, please get in touch and we&#39;ll look into it.</div>
-    </div>
-
-    <div class="faq-item" data-cat="sticker">
-      <div class="faq-q" onclick="toggleFaq(this)">Can I order a replacement sticker if I get a new car or new licence? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Yes — you can order a replacement sticker at any time while your subscription is active. Go to the <a href="replacement.html">replacement sticker page</a>, log in, and your current details will be pre-filled. Just update anything that&#39;s changed and complete the order. Cost is $7.99 + $4.99 postage and handling ($12.98 total).</div>
-    </div>
-  </div>
-
-  <!-- ── SMS REMINDERS ── -->
+  <!-- SMS -->
   <div class="faq-section" data-cat="sms">
-    <div class="faq-section-title"><span class="faq-section-icon">&#128241;</span>SMS reminders</div>
-
-    <div class="faq-item" data-cat="sms">
-      <div class="faq-q" onclick="toggleFaq(this)">When will I receive SMS reminders? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">We send SMS reminders at the following intervals before both your rego expiry date and your licence expiry date — independently:
-        <br><br>
-        &#9679; <strong>6 weeks before</strong> — first heads-up, plenty of time to plan<br>
-        &#9679; <strong>4 weeks before</strong> — time to book it in<br>
-        &#9679; <strong>2 weeks before</strong> — getting close, action recommended<br>
-        &#9679; <strong>Every day in the final week</strong> — daily until you&#39;ve renewed
-        <div class="faq-highlight">You get two sets of reminders — one for your rego expiry and one for your licence expiry. If both fall in the same month you&#39;ll receive reminders for both.</div>
-      </div>
-    </div>
-
-    <div class="faq-item" data-cat="sms">
-      <div class="faq-q" onclick="toggleFaq(this)">I&#39;ve renewed my rego. How do I stop the reminders? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Simply reply <strong>STOP</strong> to any reminder SMS and your reminders will pause immediately. You can also log in to your <a href="account.html">account</a> and pause them there.
-        <div class="faq-highlight"><strong>Important:</strong> Pausing reminders only applies to the current renewal cycle. Your reminders will automatically resume 6 weeks before next year&#39;s expiry date — you don&#39;t need to do anything. If you want to permanently stop all reminders, you can cancel your subscription.</div>
-      </div>
-    </div>
-
-    <div class="faq-item" data-cat="sms">
-      <div class="faq-q" onclick="toggleFaq(this)">Why am I still getting reminders after I replied STOP? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">STOP replies are processed automatically and should take effect immediately. If you are still receiving messages after replying STOP, contact us at <a href="mailto:support@regomate.com">support@regomate.com</a> and we will resolve it straight away. Please note that if you have both a rego reminder and a licence reminder active, replying STOP to one will pause that series — you may still receive the other series until you reply STOP to that message as well, or manage both in your account.</div>
-    </div>
-
-    <div class="faq-item" data-cat="sms">
-      <div class="faq-q" onclick="toggleFaq(this)">I changed my mobile number. Will I still get reminders? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">No — reminders go to the mobile number registered on your account. If you change your number, log in to your <a href="account.html">account</a> and update it in the Personal details section as soon as possible to avoid missing reminders.</div>
-    </div>
-
-    <div class="faq-item" data-cat="sms">
-      <div class="faq-q" onclick="toggleFaq(this)">Will I get SMS about other RegoMate products? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Occasionally we may send you information about new RegoMate products or features that we think you&#39;ll find useful. You can opt out of these marketing messages at any time by replying STOP or managing your preferences in your account — this won&#39;t affect your renewal reminders.</div>
-    </div>
-
-    <div class="faq-item" data-cat="sms">
-      <div class="faq-q" onclick="toggleFaq(this)">I didn&#39;t receive a reminder I was expecting. What happened? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">This can be caused by a few things — your mobile number may be incorrect in your account, your carrier may have filtered the message, or your phone may have blocked the number. Check your account details are correct, then contact us at <a href="mailto:support@regomate.com">support@regomate.com</a> if the problem continues. Note that RegoMate is a convenience tool — you remain responsible for renewing your rego and licence on time regardless of whether reminders are received.</div>
-    </div>
-  </div>
-
-  <!-- ── ACCOUNT & BILLING ── -->
-  <div class="faq-section" data-cat="account">
-    <div class="faq-section-title"><span class="faq-section-icon">&#128176;</span>Account &amp; billing</div>
-
-    <div class="faq-item" data-cat="account">
-      <div class="faq-q" onclick="toggleFaq(this)">How much does RegoMate cost? <span class="faq-arrow">&#8250;</span></div>
+    <div class="faq-section-title"><span>📱</span> SMS Reminders</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">When will I receive SMS reminders? <span class="faq-arrow">›</span></div>
       <div class="faq-a">
-        <strong>Year 1 — $14.99</strong> — includes your personalised sticker, alcohol wipe posted to you, and all SMS reminders for 12 months.<br><br>
-        <strong>Year 2+ — $9.99/yr</strong> — SMS reminders continue automatically. No sticker is included from year two (your windscreen sticker is designed to stay put). You can order a replacement sticker anytime for $12.98.
-        <div class="faq-highlight">Your subscription renews automatically each year. You&#39;ll receive a reminder at least <strong>7 days before</strong> your renewal date.</div>
+        We send reminders at:
+        <div class="faq-highlight">
+          <strong>6 weeks</strong> before expiry — first heads-up<br>
+          <strong>4 weeks</strong> before expiry — second reminder<br>
+          <strong>2 weeks</strong> before expiry — getting urgent<br>
+          <strong>Daily</strong> in the final week — every day until renewed
+        </div>
+        Reminders are sent for both your rego and your licence expiry dates separately.
       </div>
     </div>
-
-    <div class="faq-item" data-cat="account">
-      <div class="faq-q" onclick="toggleFaq(this)">How do I cancel my subscription? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">You can cancel at any time by logging into your <a href="account.html">account</a> and selecting Cancel subscription, or by emailing us at <a href="mailto:support@regomate.com">support@regomate.com</a>. Cancellation takes effect at the end of your current subscription period — you won&#39;t be charged again. No partial refunds are provided for unused portions of the subscription period.</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How do I stop reminders once I've renewed? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Simply reply <strong>STOP</strong> to any SMS from us. Your reminders will pause and automatically reset for the following year based on your new expiry date. You can also manage reminders from your <a href="/account.html">account page</a>.</div>
     </div>
-
-    <div class="faq-item" data-cat="account">
-      <div class="faq-q" onclick="toggleFaq(this)">Can I get a refund? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Fees are non-refundable unless required by Australian Consumer Law. If you believe you are entitled to a refund, contact us at <a href="mailto:support@regomate.com">support@regomate.com</a> and we will assess your request in accordance with our obligations under the Australian Consumer Law.</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What if my expiry date changes? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Log in to your <a href="/account.html">account</a> and update your rego or licence expiry date. Your reminders will automatically adjust to the new dates.</div>
     </div>
-
-    <div class="faq-item" data-cat="account">
-      <div class="faq-q" onclick="toggleFaq(this)">How do I update my details? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Log in to your <a href="account.html">account</a> and you can update your personal details (name, address, email, mobile), vehicle details (plate, rego expiry, licence expiry), and SMS preferences at any time. Changes take effect immediately — updated expiry dates will be used for all future reminders.</div>
-    </div>
-
-    <div class="faq-item" data-cat="account">
-      <div class="faq-q" onclick="toggleFaq(this)">Is my payment information secure? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Yes. All payments are processed by <strong>Stripe</strong>, a world-leading payment processor. We never store your full card details — only Stripe handles your payment information. All traffic on the RegoMate website is encrypted via HTTPS.</div>
-    </div>
-
-    <div class="faq-item" data-cat="account">
-      <div class="faq-q" onclick="toggleFaq(this)">I forgot my password. How do I reset it? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">On the login page, click <strong>Forgot your password?</strong> and enter your email address. We&#39;ll send you a reset link. If you don&#39;t receive it within a few minutes, check your spam folder or contact us at <a href="mailto:support@regomate.com">support@regomate.com</a>.</div>
-    </div>
-
-    <div class="faq-item" data-cat="account">
-      <div class="faq-q" onclick="toggleFaq(this)">How do I delete my account? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">You can request account deletion by emailing <a href="mailto:support@regomate.com">support@regomate.com</a>. We will delete your personal information within a reasonable time, unless we are required to retain it by law. Deleting your account will also cancel your subscription.</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Can I opt out of marketing messages? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Yes. Reply <strong>STOP</strong> to any SMS to opt out of marketing messages. You can also toggle marketing SMS on or off from your <a href="/account.html">account settings</a>. Note: replying STOP to marketing messages does not stop your renewal reminder messages — those are managed separately.</div>
     </div>
   </div>
 
-  <!-- ── INSTALLATION ── -->
-  <div class="faq-section" data-cat="install">
-    <div class="faq-section-title"><span class="faq-section-icon">&#127991;</span>Installation</div>
-
-    <div class="faq-item" data-cat="install">
-      <div class="faq-q" onclick="toggleFaq(this)">How do I apply the sticker? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">See our full <a href="install.html">step-by-step installation guide</a>. The short version: make sure your windscreen is cool, use the included alcohol wipe to clean the spot thoroughly, let it dry for 30 seconds, then apply the sticker from one edge across, pressing firmly.</div>
+  <!-- Sticker -->
+  <div class="faq-section" data-cat="sticker">
+    <div class="faq-section-title"><span>🏷️</span> The Sticker</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What's on the sticker? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Your sticker shows your rego plate, rego expiry date, and licence expiry date — all personalised to your vehicle. It also includes your name and state, and the RegoMate website address for quick reference. An alcohol wipe is included for easy application.</div>
     </div>
-
-    <div class="faq-item" data-cat="install">
-      <div class="faq-q" onclick="toggleFaq(this)">Why won&#39;t my sticker stick? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">The most common cause is a surface that wasn&#39;t cleaned or dried properly before applying. Make sure you:
-        <br><br>
-        &#9679; Use the alcohol wipe to clean the area firmly<br>
-        &#9679; Wait until the surface is completely dry (about 30 seconds)<br>
-        &#9679; Ensure the windscreen is <strong>cool</strong> — not hot from sun or a car heater<br>
-        &#9679; Don&#39;t touch the adhesive side with your fingers<br>
-        &#9679; Press firmly across the whole sticker for 10&#8211;15 seconds
-      </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Where do I put the sticker? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Most people stick it on their dashboard, sun visor, or inside the glove box — somewhere you'll notice it regularly. Use the included alcohol wipe to clean the surface first for best adhesion.</div>
     </div>
-
-    <div class="faq-item" data-cat="install">
-      <div class="faq-q" onclick="toggleFaq(this)">I lost the alcohol wipe. Can I still apply the sticker? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Yes — any isopropyl alcohol wipe (available from chemists and supermarkets) works just as well. You can also use methylated spirits on a lint-free cloth. Avoid household glass cleaners as they can leave a residue that prevents the adhesive bonding properly.</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How long does delivery take? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Your sticker is printed and posted within <strong>3–5 business days</strong> of your order. Delivery time then depends on Australia Post, typically 2–5 business days depending on your location. We are not responsible for postal delays or lost mail — please ensure your postal address is correct when signing up.</div>
     </div>
-
-    <div class="faq-item" data-cat="install">
-      <div class="faq-q" onclick="toggleFaq(this)">How do I remove the sticker if I need to? <span class="faq-arrow">&#8250;</span></div>
-      <div class="faq-a">Gently warm the sticker with a hair dryer on a low setting for 20&#8211;30 seconds to soften the adhesive, then carefully peel from one corner. Any remaining adhesive residue can be removed with a small amount of isopropyl alcohol on a cloth. Take care not to scratch the glass.</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Can I get a replacement sticker? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Yes — replacement stickers are available anytime for $12.98. This is useful if your sticker is damaged, lost, or if you get a new licence with updated expiry dates. Order from your <a href="/account.html">account page</a>.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Do I get a sticker every year? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">The physical sticker is included in your first year (Starter plan at $14.99). From year two, your subscription renews at $9.99/yr which covers SMS reminders only. You can order a replacement sticker at any time for $12.98.</div>
     </div>
   </div>
 
-  <!-- CTA -->
+  <!-- Billing -->
+  <div class="faq-section" data-cat="billing">
+    <div class="faq-section-title"><span>💳</span> Billing & Payments</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How much does RegoMate cost? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">
+        <div class="faq-highlight">
+          <strong>Starter (Year 1):</strong> $14.99 — includes physical sticker + SMS reminders<br>
+          <strong>Renewal (Year 2+):</strong> $9.99/yr — SMS reminders only<br>
+          <strong>Extra sticker:</strong> $9.99 — additional sticker + SMS reminders<br>
+          <strong>Replacement sticker:</strong> $12.98<br>
+          <strong>Postage:</strong> Free for up to 10 stickers in one order
+        </div>
+        All prices include GST.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How does automatic renewal work? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Your subscription renews automatically each year at $9.99. You'll receive a reminder at least 7 days before your renewal date. If you wish to cancel, you can do so from your <a href="/account.html">account page</a> before the renewal date.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How do I cancel my subscription? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">You can cancel anytime from your <a href="/account.html">account page</a>. Your subscription and SMS reminders will remain active until the end of your current billing period. We do not offer refunds for the remaining period unless required by Australian Consumer Law.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Is my payment information secure? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Yes. All payments are processed securely by <strong>Stripe</strong>, a world-leading payment provider. RegoMate never stores your card details — they are handled entirely by Stripe's PCI-compliant systems.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Can I get a refund? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Fees are generally non-refundable unless required by Australian Consumer Law. If you believe you are entitled to a refund, please contact us at <a href="mailto:support@regomate.com">support@regomate.com</a> and we'll do our best to help.</div>
+    </div>
+  </div>
+
+  <!-- Account -->
+  <div class="faq-section" data-cat="account">
+    <div class="faq-section-title"><span>👤</span> Your Account</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How do I access my account? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">When you purchase a RegoMate subscription, an account is automatically created using your email address. You'll receive an email invitation to set your password. Once set, you can log in at <a href="/login.html">regomate.com/login</a>.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What can I do in my account? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">From your account you can update your personal and vehicle details, change your expiry dates, manage SMS preferences, change your password, order replacement stickers, and manage your subscription.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">I forgot my password — what do I do? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Go to the <a href="/login.html">login page</a> and click <strong>Forgot password</strong>. Enter your email address and we'll send you a reset link. Check your spam folder if it doesn't arrive within a few minutes.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How do I update my vehicle or personal details? <span class="faq-arrow">›</span></div>
+      <div class="faq-a">Log in to your <a href="/account.html">account</a>, navigate to the relevant section (Personal or Vehicle), update your details, and click Save. Changes take effect immediately.</div>
+    </div>
+  </div>
+
+  <div class="no-results" id="no-results">
+    <div class="no-results-icon">🤔</div>
+    <h3>No results found</h3>
+    <p>Try different keywords or <a href="mailto:support@regomate.com" style="color:#e8a020;">contact us</a> — we're happy to help.</p>
+  </div>
+
   <div class="cta-bar">
-    <h3>Still have a question?</h3>
-    <p>We&#39;re happy to help. Email us and we&#39;ll get back to you as soon as possible.</p>
+    <h3>Still have questions?</h3>
+    <p>Our team is based on Bribie Island, QLD and we're here to help.</p>
     <div class="cta-btns">
-      <a href="mailto:support@regomate.com" class="btn-gold">&#128233; Email support</a>
-      <a href="index.html" class="btn-outline">Get started →</a>
+      <a href="mailto:support@regomate.com" class="btn-gold">📧 Email us</a>
+      <a href="/" class="btn-outline">← Back to RegoMate</a>
     </div>
   </div>
-
 </div>
 
 <footer>
   <div class="footer-logo">
-    <img src="data:image/png;base64,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" alt="">
-    <div class="footer-logo-text">REGO<span>MATE</span></div>
+    <svg viewBox="0 0 40 40" fill="none" width="24" height="24">
+      <rect width="40" height="40" rx="8" fill="#1a2733"/>
+      <path d="M20 6L8 14v12l12 8 12-8V14L20 6z" stroke="#e8a020" stroke-width="2" fill="none"/>
+    </svg>
+    <span class="footer-logo-text">REGO<span>MATE</span></span>
   </div>
-  <div>&#169; 2026 RegoMate. All rights reserved.</div>
+  <div>© 2026 Rego Mate Aus · ABN 88 726 510 577 · All prices include GST</div>
   <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="install.html">Install guide</a>
-    <a href="terms.html">Terms &amp; Privacy</a>
-    <a href="replacement.html">Replacement sticker</a>
+    <a href="/terms.html">Terms &amp; Privacy</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/account.html">My Account</a>
+    <a href="mailto:support@regomate.com">Contact</a>
   </div>
 </footer>
 
 <script>
-function toggleFaq(el) {
-  const item = el.closest(".faq-item");
-  const isOpen = item.classList.contains("open");
-  document.querySelectorAll(".faq-item.open").forEach(i => i.classList.remove("open"));
-  if (!isOpen) item.classList.add("open");
+function toggleFAQ(el) {
+  const item = el.parentElement;
+  item.classList.toggle('open');
 }
 
-function filterCat(cat, btn) {
-  document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
-  btn.classList.add("active");
-  document.getElementById("faq-search").value = "";
-  document.getElementById("search-count").textContent = "";
-  const sections = document.querySelectorAll(".faq-section");
-  const items = document.querySelectorAll(".faq-item");
-  items.forEach(i => i.style.display = "");
-  sections.forEach(s => {
-    if (cat === "all") { s.style.display = ""; return; }
-    s.style.display = s.dataset.cat === cat ? "" : "none";
-  });
-  document.getElementById("no-results").style.display = "none";
+let activecat = 'all';
+
+function filterCat(cat, pill) {
+  activecat = cat;
+  document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  filterFAQ();
 }
 
-function searchFaq(val) {
-  const q = val.toLowerCase().trim();
-  document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
-  document.querySelector(".cat-pill").classList.add("active");
-  document.querySelectorAll(".faq-section").forEach(s => s.style.display = "");
-
-  if (!q) {
-    document.querySelectorAll(".faq-item").forEach(i => i.style.display = "");
-    document.getElementById("search-count").textContent = "";
-    document.getElementById("no-results").style.display = "none";
-    return;
-  }
-
+function filterFAQ() {
+  const q = document.getElementById('faq-search').value.toLowerCase();
   let visible = 0;
-  document.querySelectorAll(".faq-item").forEach(item => {
-    const text = item.textContent.toLowerCase();
-    const match = text.includes(q);
-    item.style.display = match ? "" : "none";
-    if (match) visible++;
+  document.querySelectorAll('.faq-section').forEach(section => {
+    const cat = section.dataset.cat;
+    const catMatch = activecat === 'all' || cat === activecat;
+    let sectionVisible = 0;
+    section.querySelectorAll('.faq-item').forEach(item => {
+      const text = item.textContent.toLowerCase();
+      const show = catMatch && (q === '' || text.includes(q));
+      item.style.display = show ? '' : 'none';
+      if (show) { sectionVisible++; visible++; }
+    });
+    section.style.display = sectionVisible > 0 ? '' : 'none';
   });
-
-  // Hide empty sections
-  document.querySelectorAll(".faq-section").forEach(s => {
-    const anyVisible = [...s.querySelectorAll(".faq-item")].some(i => i.style.display !== "none");
-    s.style.display = anyVisible ? "" : "none";
-  });
-
-  document.getElementById("search-count").textContent = visible + " result" + (visible !== 1 ? "s" : "");
-  document.getElementById("no-results").style.display = visible === 0 ? "block" : "none";
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+  document.getElementById('search-count').textContent = q ? visible + ' result' + (visible !== 1 ? 's' : '') : '';
 }
 </script>
 </body>
