@@ -421,13 +421,47 @@
         <label>Mobile (for SMS reminders)</label>
         <input type="tel" id="mobile" placeholder="04XX XXX XXX" autocomplete="tel">
       </div>
-      <div class="form-group">
-        <label>Postal address</label>
-        <input type="text" id="address" placeholder="123 Main St, BRIBIE ISLAND QLD 4507" autocomplete="street-address">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Unit / Street number</label>
+          <input type="text" id="addrStreetNo" placeholder="e.g. 2/38 or 38" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label>Street name</label>
+          <input type="text" id="addrStreetName" placeholder="e.g. Port Drive" autocomplete="off">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Suburb</label>
+          <input type="text" id="addrSuburb" placeholder="e.g. Airlie Beach" autocomplete="off">
+        </div>
+        <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div>
+            <label>State</label>
+            <select id="addrState">
+              <option value="">State</option>
+              <option>QLD</option><option>NSW</option><option>VIC</option>
+              <option>SA</option><option>WA</option><option>TAS</option>
+              <option>ACT</option><option>NT</option>
+            </select>
+          </div>
+          <div>
+            <label>Postcode</label>
+            <input type="text" id="addrPostcode" placeholder="4000" maxlength="4" inputmode="numeric">
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label>Licence expiry</label>
-        <input type="month" id="licExpiry">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <select id="licExpiryMonth">
+            <option value="">Month</option>
+          </select>
+          <select id="licExpiryYear">
+            <option value="">Year</option>
+          </select>
+        </div>
       </div>
       <button class="btn-next" onclick="goStep(2)">Next: Vehicle details →</button>
     </div>
@@ -753,6 +787,37 @@
 
 <!-- ── JavaScript ── -->
 <script>
+  // ── Month / Year dropdown helpers ────────────────────────────────────────
+  const MONTHS = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+  const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function buildMonthOptions(selectedMonth) {
+    return '<option value="">Month</option>' +
+      MONTHS.map((m, i) =>
+        `<option value="${m}"${selectedMonth===m?' selected':''}>${MONTH_NAMES[i]}</option>`
+      ).join('');
+  }
+
+  function buildYearOptions(selectedYear) {
+    const now = new Date();
+    const startYear = now.getFullYear();
+    let opts = '<option value="">Year</option>';
+    for (let y = startYear; y <= startYear + 10; y++) {
+      opts += `<option value="${y}"${selectedYear===String(y)?' selected':''}>${y}</option>`;
+    }
+    return opts;
+  }
+
+  function populateDateDropdowns(monthId, yearId) {
+    const mEl = document.getElementById(monthId);
+    const yEl = document.getElementById(yearId);
+    if (mEl) mEl.innerHTML = buildMonthOptions();
+    if (yEl) yEl.innerHTML = buildYearOptions();
+  }
+
+  // Populate licence expiry dropdowns on load
+  populateDateDropdowns('licExpiryMonth', 'licExpiryYear');
+
   const BACKEND_URL = 'https://regomate-backend-production.up.railway.app';
 
   // ── Order state ──────────────────────────────────────────────────────────
@@ -839,14 +904,18 @@
             </select>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Rego expiry</label>
-            <input type="month" oninput="updateExtra('${e.id}','regoExpiry',this.value)">
+        <div class="form-group">
+          <label>Rego expiry</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <select onchange="updateExtra('${e.id}','regoExpiryMonth',this.value)">${buildMonthOptions()}</select>
+            <select onchange="updateExtra('${e.id}','regoExpiryYear',this.value)">${buildYearOptions()}</select>
           </div>
-          <div class="form-group">
-            <label>Licence expiry</label>
-            <input type="month" oninput="updateExtra('${e.id}','licExpiry',this.value)">
+        </div>
+        <div class="form-group">
+          <label>Licence expiry</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <select onchange="updateExtra('${e.id}','licExpiryMonth',this.value)">${buildMonthOptions()}</select>
+            <select onchange="updateExtra('${e.id}','licExpiryYear',this.value)">${buildYearOptions()}</select>
           </div>
         </div>
       </div>
@@ -894,16 +963,32 @@
 
   // ── Payment ───────────────────────────────────────────────────────────────
   function collectForm() {
+    const streetNo   = (document.getElementById('addrStreetNo')   ||{}).value||'';
+    const streetName = (document.getElementById('addrStreetName') ||{}).value||'';
+    const suburb     = (document.getElementById('addrSuburb')     ||{}).value||'';
+    const addrState  = (document.getElementById('addrState')      ||{}).value||'';
+    const postcode   = (document.getElementById('addrPostcode')   ||{}).value||'';
+    const address    = [streetNo, streetName, suburb, addrState, postcode].filter(Boolean).join(', ');
+
+    const licMonth = (document.getElementById('licExpiryMonth')||{}).value||'';
+    const licYear  = (document.getElementById('licExpiryYear') ||{}).value||'';
+    const licExpiry = (licMonth && licYear) ? licYear + '-' + licMonth : '';
+
     return {
       firstName:   (document.getElementById('firstName')  ||{}).value||'',
       lastName:    (document.getElementById('lastName')   ||{}).value||'',
       email:       (document.getElementById('email')      ||{}).value||'',
       mobile:      (document.getElementById('mobile')     ||{}).value||'',
-      address:     (document.getElementById('address')    ||{}).value||'',
+      addrStreetNo,
+      addrStreetName,
+      addrSuburb,
+      addrState,
+      addrPostcode: postcode,
+      address,
       plate:       (document.getElementById('plate')      ||{}).value||'',
       state:       (document.getElementById('state')      ||{}).value||'',
       regoExpiry:  (document.getElementById('regoExpiry') ||{}).value||'',
-      licExpiry:   (document.getElementById('licExpiry')  ||{}).value||'',
+      licExpiry,
       vehicleType: (document.getElementById('vehicleType')||{}).value||'',
       makeModel:   (document.getElementById('makeModel')  ||{}).value||'',
     };
@@ -915,8 +1000,9 @@
     errEl.textContent = '';
 
     const d = collectForm();
-    if (!d.firstName || !d.lastName || !d.email || !d.mobile || !d.address) {
-      errEl.textContent = 'Please complete your personal details first.'; return;
+    if (!d.firstName || !d.lastName || !d.email || !d.mobile ||
+        !d.addrStreetNo || !d.addrStreetName || !d.addrSuburb || !d.addrState || !d.addrPostcode) {
+      errEl.textContent = 'Please complete all personal and address details first.'; return;
     }
     if (!d.plate || !d.state || !d.regoExpiry) {
       errEl.textContent = 'Please complete your vehicle details first.'; return;
