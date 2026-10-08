@@ -686,7 +686,10 @@ function renderStickerTab(d) {
           <button class="card-action" onclick="openStickerForm('${v.id}','vehicle_change')">I've changed vehicles</button>
           <button class="card-action" onclick="openStickerForm('${v.id}','licence_renewal')">Licence renewed</button>
           <button class="card-action" onclick="openStickerForm('${v.id}','replacement')">Order replacement</button>
+          <button class="card-action" onclick="pauseReminder('${v.id}','rego')">Pause current rego reminders</button>
+          <button class="card-action" onclick="pauseReminder('${v.id}','licence')">Pause current licence reminders</button>
         </div>
+        <p id="reminder-feedback-${v.id}" role="status" style="font-size:14px;margin-top:12px;"></p>
         <div id="sticker-form-${v.id}" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.07);"></div>
       </div>
     `;
@@ -698,6 +701,8 @@ function closeStickerForm(vehicleId) {
   form.style.display = 'none';
   form.innerHTML = '';
 }
+
+async function pauseReminder(vehicleId,type){const feedback=document.getElementById('reminder-feedback-'+vehicleId);feedback.textContent='Saving reminder preference…';try{const {data:{session}}=await sb.auth.getSession();if(!session)throw new Error('Sign in again to change reminders.');const response=await fetch(BACKEND+'/account/reminder-pause',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+session.access_token},body:JSON.stringify({vehicleId,type})});const result=await response.json();if(!response.ok)throw new Error(result.error||'Could not pause reminders.');feedback.textContent=result.message;}catch(e){feedback.textContent=e.message;}}
 
 function openStickerForm(vehicleId, reason) {
   // Close any other open forms first
