@@ -828,14 +828,17 @@ async function submitStickerUpdate(vehicleId, reason) {
 
   try {
     const { data: { session } } = await sb.auth.getSession();
+    const body=JSON.stringify({ vehicleId, reason, updates });
+    const scope=vehicleId+':'+reason;
+    if(!stickerKeys[scope] || stickerKeys[scope].body!==body)stickerKeys[scope]={body,key:crypto.randomUUID()};
     const res = await fetch(BACKEND + '/account/sticker-update', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + session.access_token,
-        'Idempotency-Key':stickerKeys[vehicleId+reason]||(stickerKeys[vehicleId+reason]=crypto.randomUUID())
+        'Idempotency-Key':stickerKeys[scope].key
       },
-      body: JSON.stringify({ vehicleId, reason, updates })
+      body
     });
     const result = await res.json();
 
