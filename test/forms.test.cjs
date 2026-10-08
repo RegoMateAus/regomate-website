@@ -19,6 +19,11 @@ test('auth callbacks yield immediately so Supabase cannot deadlock on nested aut
  let callback,scheduled=[];const dom=page('account',w=>{w.supabase={createClient:()=>({auth:{onAuthStateChange:fn=>{callback=fn;}}})};w.Stripe=()=>({});w.setTimeout=fn=>{scheduled.push(fn);return 1;};});
  try{assert.equal(callback('SIGNED_IN',{access_token:'synthetic',user:{email:'owner@example.test'}}),undefined);assert.equal(scheduled.length,1);}finally{dom.window.close();}
 });
+
+test('an unconfigured preview cannot submit a checkout',()=>{
+ let requests=0;const dom=page('index',w=>{w.RM_CONFIG.previewUnavailable=true;w.fetch=()=>{requests++;throw Error('Must not contact a provider');};});
+ try{dom.window.document.getElementById('pay-btn').click();assert.equal(requests,0);assert.match(dom.window.document.getElementById('pay-error').textContent,/Payments are unavailable/);}finally{dom.window.close();}
+});
 test('an account API failure keeps a visible error and permits a later retry',async()=>{
  let callback,scheduled,requests=0;const dom=page('account',w=>{w.supabase={createClient:()=>({auth:{onAuthStateChange:fn=>{callback=fn;}}})};w.Stripe=()=>({});w.setTimeout=fn=>{scheduled=fn;return 1;};w.fetch=async()=>{requests++;return {ok:false};};w.console.error=()=>{};});
  try{const session={access_token:'synthetic',user:{email:'owner@example.test'}};callback('SIGNED_IN',session);await scheduled();assert.match(dom.window.document.getElementById('loading').textContent,/Could not load/);assert.notEqual(dom.window.document.getElementById('loading').style.display,'none');callback('SIGNED_IN',session);await scheduled();assert.equal(requests,2);}finally{dom.window.close();}
