@@ -359,7 +359,7 @@
     <h1>Your rego &amp; licence,<br><span>always on time.</span></h1>
     <p class="hero-sub">Sign up once and get a physical reminder sticker posted to you — plus automatic SMS alerts before your rego and licence expire every year.</p>
     <div class="hero-btns">
-      <a href="#signup" class="btn-primary">Get your sticker — $14.99 →</a>
+      <a href="#signup" class="btn-primary">Get your sticker — $19.98 delivered →</a>
       <a href="#how" class="btn-secondary">See how it works</a>
     </div>
     <div class="hero-checks">
@@ -380,7 +380,7 @@
       <div class="plan-tab active" id="tab-starter">
         <span class="badge">First year</span>
         <div class="plan-name">Starter</div>
-        <div class="plan-price"><sup>$</sup>14.99<sub>/yr</sub></div>
+        <div class="plan-price"><sup>$</sup>14.99<sub>/first year</sub></div>
         <div class="plan-desc">Includes physical sticker + SMS reminders</div>
       </div>
       <div class="plan-tab" id="tab-renewal">
@@ -393,7 +393,7 @@
     <div class="sms-banner">
       <strong>SMS reminders included</strong> — 6 weeks, 4 weeks, 2 weeks before expiry,
       then daily in the final week.
-      <strong>Pause reminders once renewed — they reset automatically next year.</strong>
+      <strong>Renewed your rego? Update the payment date in your account.</strong>
     </div>
 
     <!-- Step tabs -->
@@ -742,7 +742,7 @@
         <li>All SMS reminders included</li>
         <li>Rego &amp; licence both tracked</li>
         <li>3, 6 or 12 month rego periods supported</li>
-        <li>Reminders pause once renewed, reset next year</li>
+        <li>Update your payment dates after renewing</li>
         <li>Replacement sticker $9.99 (P&amp;H included)</li>
         <li>Cancel anytime</li>
       </ul>
@@ -769,7 +769,7 @@
         <li>All SMS reminders included</li>
         <li>Rego &amp; licence both tracked</li>
         <li>3, 6 or 12 month rego periods supported</li>
-        <li>Reminders pause once renewed, reset next year</li>
+        <li>Update your payment dates after renewing</li>
         <li>Replacement sticker $9.99 (P&amp;H included)</li>
         <li>Cancel anytime</li>
       </ul>
@@ -1140,6 +1140,8 @@ function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':
     const btn   = document.getElementById('pay-btn');
     const errEl = document.getElementById('pay-error');
     errEl.textContent = '';
+
+    if(RM_CONFIG.previewUnavailable){errEl.textContent='Payments are unavailable in this preview. You can explore the form without submitting an order.';return;}
 
     const d = collectForm();
     if(!validatePersonal()||!validateVehicle()||!validateExtras())return;
