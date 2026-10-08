@@ -926,6 +926,7 @@
 
   const BACKEND_URL = RM_CONFIG.apiUrl;
   let checkoutKey=crypto.randomUUID();
+  let lastCheckoutBody='';
 
 function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
   // ── Order state ──────────────────────────────────────────────────────────
@@ -963,13 +964,10 @@ function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':
     this.classList.add('active');
     document.getElementById('tab-starter').classList.remove('active');
     window.location.href='/login';return;
-    order.plan = 'annual_renewal'; order.basePrice = 9.99;
-    updateOrderSummary();
   });
 
   // ── Extras ───────────────────────────────────────────────────────────────
   function addExtra() {
-    checkoutKey=crypto.randomUUID();
     if(order.extras.length>=7){alert("Maximum eight vehicles per order.");return;}
     extraCounter++;
     const id = 'extra-' + extraCounter;
@@ -980,7 +978,6 @@ function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':
   }
 
   function removeExtra(id) {
-    checkoutKey=crypto.randomUUID();
     order.extras = order.extras.filter(e => e.id !== id);
     renderExtras();
     updateOrderSummary();
@@ -1055,7 +1052,6 @@ function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':
   function updateExtra(id, field, val) {
     const e = order.extras.find(x => x.id === id);
     if (e) e[field] = val;
-    checkoutKey=crypto.randomUUID();
   }
 
   // ── Order summary ─────────────────────────────────────────────────────────
@@ -1148,6 +1144,7 @@ function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':
     const d = collectForm();
     if(!validatePersonal()||!validateVehicle()||!validateExtras())return;
     if(!document.getElementById('renewal-consent').checked){errEl.textContent='Please accept the annual renewal terms.';return;}
+    if(order.extras.length && !document.getElementById('other-owner-consent').checked){errEl.textContent='Please confirm that the other vehicle owners consent to SMS reminders.';return;}
     if (!d.firstName || !d.lastName || !d.email || !d.mobile ||
         !d.addrStreetNo || !d.addrStreetName || !d.addrSuburb || !d.addrState || !d.addrPostcode) {
       errEl.textContent = 'Please complete all personal and address details first.'; return;
@@ -1163,25 +1160,19 @@ function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':
     btn.disabled = true;
 
     try {
+      const body=JSON.stringify({plan:order.plan,customerEmail:d.email,vehicleData:d,extras:order.extras,renewalConsent:document.getElementById('renewal-consent').checked,marketingConsent:document.getElementById('marketing-consent').checked,otherOwnerConsent:document.getElementById('other-owner-consent').checked});
+      if(body!==lastCheckoutBody){lastCheckoutBody=body;checkoutKey=crypto.randomUUID();}
       const resp = await fetch(BACKEND_URL + '/checkout/create-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Idempotency-Key': checkoutKey },
-        body: JSON.stringify({
-          plan: order.plan,
-          customerEmail: d.email,
-          vehicleData: d,
-          extras: order.extras,
-          renewalConsent:document.getElementById("renewal-consent").checked,
-          marketingConsent:document.getElementById("marketing-consent").checked,
-          otherOwnerConsent:document.getElementById("other-owner-consent").checked,
-        }),
+        body,
       });
       const result = await resp.json();
       if (!resp.ok) throw new Error(result.error || 'Payment setup failed');
       window.location.href = result.url;
     } catch (err) {
       console.error(err);
-      errEl.textContent = 'Something went wrong. Please try again or contact support@regomate.com';
+      errEl.textContent = err.message || 'Something went wrong. Please try again or contact support@regomate.com';
       btn.textContent = 'Pay $' + getTotal() + ' — get my sticker →';
       btn.disabled = false;
     }
@@ -1193,8 +1184,6 @@ function validDate(d,m,y=2000){const date=new Date(Date.UTC(Number(y),Number(m)-
 function validateVehicle(){for(const id of ['plate','state','regoExpiryDay','regoExpiryMonth','licExpiryDay','licExpiryMonth','licExpiryYear'])if(!document.getElementById(id).value)return failForm('Please complete your vehicle details.',id);if(!validDate(document.getElementById('regoExpiryDay').value,document.getElementById('regoExpiryMonth').value))return failForm('Enter a valid rego expiry date.','regoExpiryDay');if(!validDate(document.getElementById('licExpiryDay').value,document.getElementById('licExpiryMonth').value,document.getElementById('licExpiryYear').value))return failForm('Enter a valid licence expiry date.','licExpiryDay');return true;}
 function validateExtras(){for(const e of order.extras){if(!e.firstName||!e.mobile||!e.plate||!e.state||!validDate(e.regoExpiryDay,e.regoExpiryMonth)||!validDate(e.licExpiryDay,e.licExpiryMonth,e.licExpiryYear))return failForm('Complete all owner and expiry details for each extra vehicle.','extras-list');}return true;}
 function restoreExtraValues(){for(const e of order.extras){const container=document.getElementById("ei-"+e.id);if(!container)continue;container.querySelectorAll('[data-rm-input],[data-rm-change],[oninput],[onchange]').forEach(el=>{const handler=el.getAttribute('data-rm-input')||el.getAttribute('data-rm-change')||el.getAttribute('oninput')||el.getAttribute('onchange');const match=/updateExtra\('[^']+','([^']+)'/.exec(handler||'');if(match)el.value=e[match[1]]??'';});}}
-document.getElementById('panel-1').addEventListener('input',()=>{checkoutKey=crypto.randomUUID();});
-document.getElementById('panel-2').addEventListener('input',()=>{checkoutKey=crypto.randomUUID();});
 </script>
 </body>
 </html>
