@@ -404,6 +404,7 @@
       <div class="step-tab" id="stab-4" onclick="goStep(4)">4. Payment</div>
     </div>
 
+    <div id="pay-error" role="alert" aria-live="polite"></div>
     <!-- ── Panel 1: Personal ── -->
     <div class="form-panel active" id="panel-1">
       <div class="form-row">
@@ -566,7 +567,6 @@
         <div class="sum-row total"><span>Total</span><span id="pay-summary-total">$19.98</span></div>
       </div>
 
-      <div id="pay-error" role="alert" aria-live="polite"></div>
       <label style="display:block;margin:14px 0"><input type="checkbox" id="renewal-consent"> I agree to the <a href="/terms">terms</a> and annual renewal: $9.99 for my primary vehicle plus $4.99 for each extra vehicle from year two. I can cancel renewal in my account.</label>
       <label style="display:block;margin:14px 0"><input type="checkbox" id="other-owner-consent"> If I add other vehicle owners, I confirm they consent to receiving their SMS reminders.</label>
       <label style="display:block;margin:14px 0"><input type="checkbox" id="marketing-consent"> Optional: send me product news.</label>
@@ -943,6 +943,7 @@ function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':
     if(n>1 && !validatePersonal())return;
     if(n>2 && !validateVehicle())return;
     if(n>3 && !validateExtras())return;
+    document.getElementById('pay-error').textContent='';
     document.querySelectorAll('.form-panel').forEach((p, i) => {
       p.classList.toggle('active', i + 1 === n);
     });
