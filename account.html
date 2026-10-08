@@ -414,7 +414,7 @@ const SUPABASE_ANON_KEY = RM_CONFIG.supabaseKey;
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const STRIPE_PUBLISHABLE_KEY = RM_CONFIG.stripeKey;
-const stripeClient = Stripe(STRIPE_PUBLISHABLE_KEY);
+const stripeClient = STRIPE_PUBLISHABLE_KEY ? Stripe(STRIPE_PUBLISHABLE_KEY) : null;
 let stripeElements = null;
 let cardElement = null;
 
@@ -429,7 +429,7 @@ async function initAccountPage(session) {
   initDone = true;
   currentUser = session.user;
   initDropdowns();
-  await loadAccount(session.access_token);
+  if(!await loadAccount(session.access_token)){initDone=false;return;}
   await loadPaymentMethod(session.access_token);
   document.getElementById('loading').style.display = 'none';
 }
@@ -500,9 +500,11 @@ async function loadAccount(token) {
     if (!res.ok) throw new Error('Failed to load');
     accountData = await res.json();
     populateUI(accountData);
+    return true;
   } catch(e) {
     console.error(e);
     document.getElementById('loading').textContent = 'Could not load account. Please refresh.';
+    return false;
   }
 }
 
