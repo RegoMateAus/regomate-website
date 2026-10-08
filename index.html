@@ -566,7 +566,10 @@
         <div class="sum-row total"><span>Total</span><span id="pay-summary-total">$19.98</span></div>
       </div>
 
-      <div id="pay-error"></div>
+      <div id="pay-error" role="alert" aria-live="polite"></div>
+      <label style="display:block;margin:14px 0"><input type="checkbox" id="renewal-consent"> I agree to the <a href="/terms">terms</a> and annual renewal: $9.99 for my primary vehicle plus $4.99 for each extra vehicle from year two. I can cancel renewal in my account.</label>
+      <label style="display:block;margin:14px 0"><input type="checkbox" id="other-owner-consent"> If I add other vehicle owners, I confirm they consent to receiving their SMS reminders.</label>
+      <label style="display:block;margin:14px 0"><input type="checkbox" id="marketing-consent"> Optional: send me product news.</label>
 
       <button class="btn-pay" id="pay-btn" onclick="handlePayment()">
         Pay $19.98 — get my sticker →
@@ -576,8 +579,8 @@
       <p class="pay-terms">
         By subscribing you agree to our
         <a href="/terms.html">Terms &amp; Conditions</a>,
-        including receiving SMS reminders and occasional product updates.
-        Reply STOP anytime to opt out of marketing.
+        including receiving the SMS reminders needed to provide this service. Product updates are optional.
+        Reply STOP anytime to stop all SMS.
       </p>
     </div>
   </div><!-- /signup-card -->
@@ -727,14 +730,14 @@
         <li>SMS reminders — 6w, 4w, 2w + daily final week</li>
         <li>Rego &amp; licence expiry both tracked</li>
         <li>3, 6 or 12 month rego periods supported</li>
-        <li>Reminders pause once renewed, reset next year</li>
+        <li>Pause reminders for the current expiry date from your account</li>
         <li>Auto-renews at $9.99/yr from year two</li>
       </ul>
     </div>
     <div class="price-card">
       <h4>Annual renewal — Year 2+</h4>
       <div class="price-val">$9.99</div>
-      <div class="price-sub">per year, per vehicle (SMS only)</div>
+      <div class="price-sub">per year for the primary vehicle (SMS only)</div>
       <ul>
         <li>All SMS reminders included</li>
         <li>Rego &amp; licence both tracked</li>
@@ -773,7 +776,7 @@
     </div>
   </div>
   <div style="margin-top:20px;background:rgba(245,166,35,.08);border-radius:10px;padding:16px 20px;font-size:.85rem;color:var(--grey);border-left:3px solid var(--gold);">
-    <strong style="color:var(--gold);">Licence renewal sticker:</strong> When your licence is renewed, we'll automatically send you a new sticker — you just pay the $4.99 postage &amp; handling. This is managed through your subscription, no action needed.
+    <strong style="color:var(--gold);">Licence renewal sticker:</strong> After renewing your licence, enter the new expiry date in your account and order an updated sticker for $4.99 postage &amp; handling.
   </div>
 </section>
 </div>
@@ -921,8 +924,10 @@
   populateDayMonthYear('licExpiryDay', 'licExpiryMonth', 'licExpiryYear');
   populateDayMonth('regoExpiryDay', 'regoExpiryMonth');
 
-  const BACKEND_URL = 'https://regomate-backend-production.up.railway.app';
+  const BACKEND_URL = RM_CONFIG.apiUrl;
+  let checkoutKey=crypto.randomUUID();
 
+function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
   // ── Order state ──────────────────────────────────────────────────────────
   const order = { plan: 'starter', extras: [], basePrice: 14.99, extraPrice: 7.99 };
   const POSTAGE = 4.99;
@@ -934,6 +939,9 @@
 
   // ── Step navigation ──────────────────────────────────────────────────────
   function goStep(n) {
+    if(n>1 && !validatePersonal())return;
+    if(n>2 && !validateVehicle())return;
+    if(n>3 && !validateExtras())return;
     document.querySelectorAll('.form-panel').forEach((p, i) => {
       p.classList.toggle('active', i + 1 === n);
     });
@@ -954,12 +962,15 @@
   document.getElementById('tab-renewal').addEventListener('click', function() {
     this.classList.add('active');
     document.getElementById('tab-starter').classList.remove('active');
+    window.location.href='/login';return;
     order.plan = 'annual_renewal'; order.basePrice = 9.99;
     updateOrderSummary();
   });
 
   // ── Extras ───────────────────────────────────────────────────────────────
   function addExtra() {
+    checkoutKey=crypto.randomUUID();
+    if(order.extras.length>=7){alert("Maximum eight vehicles per order.");return;}
     extraCounter++;
     const id = 'extra-' + extraCounter;
     order.extras.push({ id, plate: '', state: '', regoExpiry: '', licExpiry: '',
@@ -969,6 +980,7 @@
   }
 
   function removeExtra(id) {
+    checkoutKey=crypto.randomUUID();
     order.extras = order.extras.filter(e => e.id !== id);
     renderExtras();
     updateOrderSummary();
@@ -1037,11 +1049,13 @@
         </div>
       </div>
     `).join('');
+    restoreExtraValues();
   }
 
   function updateExtra(id, field, val) {
     const e = order.extras.find(x => x.id === id);
     if (e) e[field] = val;
+    checkoutKey=crypto.randomUUID();
   }
 
   // ── Order summary ─────────────────────────────────────────────────────────
@@ -1112,9 +1126,9 @@
       stickerName: (document.getElementById('stickerName')||{}).value||'',
       email:       (document.getElementById('email')      ||{}).value||'',
       mobile:      (document.getElementById('mobile')     ||{}).value||'',
-      addrStreetNo,
-      addrStreetName,
-      addrSuburb,
+      addrStreetNo: streetNo,
+      addrStreetName: streetName,
+      addrSuburb: suburb,
       addrState,
       addrPostcode: postcode,
       address,
@@ -1132,6 +1146,8 @@
     errEl.textContent = '';
 
     const d = collectForm();
+    if(!validatePersonal()||!validateVehicle()||!validateExtras())return;
+    if(!document.getElementById('renewal-consent').checked){errEl.textContent='Please accept the annual renewal terms.';return;}
     if (!d.firstName || !d.lastName || !d.email || !d.mobile ||
         !d.addrStreetNo || !d.addrStreetName || !d.addrSuburb || !d.addrState || !d.addrPostcode) {
       errEl.textContent = 'Please complete all personal and address details first.'; return;
@@ -1149,12 +1165,15 @@
     try {
       const resp = await fetch(BACKEND_URL + '/checkout/create-session', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Idempotency-Key': checkoutKey },
         body: JSON.stringify({
           plan: order.plan,
           customerEmail: d.email,
           vehicleData: d,
           extras: order.extras,
+          renewalConsent:document.getElementById("renewal-consent").checked,
+          marketingConsent:document.getElementById("marketing-consent").checked,
+          otherOwnerConsent:document.getElementById("other-owner-consent").checked,
         }),
       });
       const result = await resp.json();
@@ -1167,6 +1186,15 @@
       btn.disabled = false;
     }
   }
+
+function failForm(message,id){document.getElementById('pay-error').textContent=message;const target=document.getElementById(id);if(target){const panel=target.closest('.form-panel');document.querySelectorAll('.form-panel').forEach(p=>p.classList.toggle('active',p===panel));target.focus();}return false;}
+function validatePersonal(){for(const id of ['firstName','lastName','email','mobile','addrStreetNo','addrStreetName','addrSuburb','addrState','addrPostcode'])if(!document.getElementById(id).value.trim())return failForm('Please complete this field.',id);if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value))return failForm('Enter a valid email.','email');if(!/^(04\d{8}|\+614\d{8})$/.test(document.getElementById('mobile').value.replace(/[ ()-]/g,'')))return failForm('Enter a valid Australian mobile number.','mobile');if(!/^\d{4}$/.test(document.getElementById('addrPostcode').value))return failForm('Enter a four digit postcode.','addrPostcode');return true;}
+function validDate(d,m,y=2000){const date=new Date(Date.UTC(Number(y),Number(m)-1,Number(d)));return Number(d)>0&&Number(m)>0&&date.getUTCDate()===Number(d)&&date.getUTCMonth()===Number(m)-1;}
+function validateVehicle(){for(const id of ['plate','state','regoExpiryDay','regoExpiryMonth','licExpiryDay','licExpiryMonth','licExpiryYear'])if(!document.getElementById(id).value)return failForm('Please complete your vehicle details.',id);if(!validDate(document.getElementById('regoExpiryDay').value,document.getElementById('regoExpiryMonth').value))return failForm('Enter a valid rego expiry date.','regoExpiryDay');if(!validDate(document.getElementById('licExpiryDay').value,document.getElementById('licExpiryMonth').value,document.getElementById('licExpiryYear').value))return failForm('Enter a valid licence expiry date.','licExpiryDay');return true;}
+function validateExtras(){for(const e of order.extras){if(!e.firstName||!e.mobile||!e.plate||!e.state||!validDate(e.regoExpiryDay,e.regoExpiryMonth)||!validDate(e.licExpiryDay,e.licExpiryMonth,e.licExpiryYear))return failForm('Complete all owner and expiry details for each extra vehicle.','extras-list');}return true;}
+function restoreExtraValues(){for(const e of order.extras){const container=document.getElementById("ei-"+e.id);if(!container)continue;container.querySelectorAll('[data-rm-input],[data-rm-change],[oninput],[onchange]').forEach(el=>{const handler=el.getAttribute('data-rm-input')||el.getAttribute('data-rm-change')||el.getAttribute('oninput')||el.getAttribute('onchange');const match=/updateExtra\('[^']+','([^']+)'/.exec(handler||'');if(match)el.value=e[match[1]]??'';});}}
+document.getElementById('panel-1').addEventListener('input',()=>{checkoutKey=crypto.randomUUID();});
+document.getElementById('panel-2').addEventListener('input',()=>{checkoutKey=crypto.randomUUID();});
 </script>
 </body>
 </html>
