@@ -8,6 +8,8 @@ if(process.env.CONTEXT && process.env.CONTEXT!=='production'){
  config.supabaseUrl=process.env.PREVIEW_SUPABASE_URL||'https://preview-unconfigured.invalid';
  config.supabaseKey=process.env.PREVIEW_SUPABASE_PUBLIC_KEY||'';
  config.stripeKey=process.env.PREVIEW_STRIPE_PUBLIC_KEY||'';
+ if(config.apiUrl==='https://regomate-backend-production.up.railway.app' || config.supabaseUrl==='https://njchkgyorcwmkvdpzxue.supabase.co' || config.stripeKey.startsWith('pk_live_'))throw new Error('Previews require isolated services and Stripe sandbox keys.');
+ config.previewUnavailable=!process.env.PREVIEW_API_URL || !config.supabaseKey || !config.stripeKey;
 }
 // Never retain files from a previous build, including server source.
 if(!DIST.startsWith(ROOT+path.sep))throw new Error('Unsafe build path');
