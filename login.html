@@ -129,14 +129,15 @@ footer{border-top:1px solid rgba(255,255,255,0.07);padding:1.25rem 2.5rem;displa
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // Supabase anon key is safe to use client-side — Row Level Security controls access
-const SUPABASE_URL = 'https://njchkgyorcwmkvdpzxue.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_4sSK0_NZ12nosdyYVeqlbA_fWD7rPAQ';
+const SUPABASE_URL = RM_CONFIG.supabaseUrl;
+const SUPABASE_ANON_KEY = RM_CONFIG.supabaseKey;
+function loginDestination(){return new URLSearchParams(location.search).get('next')==='admin'?'/admin':'/account';}
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Redirect if already logged in
 (async () => {
   const { data: { session } } = await sb.auth.getSession();
-  if (session) window.location.href = '/account.html';
+  if (session) window.location.href = loginDestination();
 })();
 
 function setMode(mode, tabEl) {
@@ -184,7 +185,7 @@ async function loginWithPassword() {
     btn.textContent = 'Sign in'; btn.disabled = false;
     return;
   }
-  window.location.href = '/account.html';
+  window.location.href = loginDestination();
 }
 
 document.getElementById('password')?.addEventListener('keydown', e => {
@@ -200,7 +201,7 @@ async function sendMagicLink() {
   hideMessages();
   const { error } = await sb.auth.signInWithOtp({
     email,
-    options: { emailRedirectTo: window.location.origin + '/account.html' }
+    options: { shouldCreateUser:false,emailRedirectTo: window.location.origin + '/account' }
   });
   if (error) {
     showError(error.message);
@@ -216,14 +217,14 @@ async function sendReset() {
   if (!email) { showError('Please enter your email address.'); return; }
   hideMessages();
   const { error } = await sb.auth.resetPasswordForEmail(email, {
-    redirectTo: window.location.origin + '/account.html'
+    redirectTo: window.location.origin + '/account'
   });
   if (error) { showError(error.message); return; }
   showSuccess('Password reset email sent! Check your inbox.');
 }
 
 sb.auth.onAuthStateChange((event, session) => {
-  if (event === 'SIGNED_IN' && session) window.location.href = '/account.html';
+  if (event === 'SIGNED_IN' && session) window.location.href = loginDestination();
 });
 </script>
 </body>

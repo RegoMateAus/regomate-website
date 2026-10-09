@@ -367,8 +367,8 @@
   <div class="login-box">
     <div class="login-logo">🚗</div>
     <h1>RegoMate Admin</h1>
-    <p>Enter your password to continue</p>
-    <input type="password" id="password-input" placeholder="Admin password" />
+    <p>Sign in with your individual administrator account.</p><label for="admin-email">Email</label><input type="email" id="admin-email" autocomplete="username">
+    <input type="password" id="password-input" placeholder="Your password" autocomplete="current-password" />
     <button onclick="login()">Sign in</button>
     <div class="login-error" id="login-error">Incorrect password</div>
   </div>
@@ -389,11 +389,11 @@
   </header>
 
   <nav>
-    <div class="tab active" onclick="showTab('dashboard')">Dashboard</div>
-    <div class="tab" onclick="showTab('subscribers')">Subscribers</div>
-    <div class="tab" onclick="showTab('vehicles')">Vehicles</div>
-    <div class="tab" onclick="showTab('orders')">Orders</div>
-    <div class="tab" onclick="showTab('sms')">SMS Log</div>
+    <div class="tab active" onclick="showTab('dashboard',this)">Dashboard</div>
+    <div class="tab" onclick="showTab('subscribers',this)">Subscribers</div>
+    <div class="tab" onclick="showTab('vehicles',this)">Vehicles</div>
+    <div class="tab" onclick="showTab('orders',this)">Orders</div>
+    <div class="tab" onclick="showTab('sms',this)">SMS Log</div>
   </nav>
 
   <div class="content">
@@ -550,60 +550,22 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3"></script>
 <script>
-  // ── Config ─────────────────────────────────────────────────
-  const SUPABASE_URL = 'https://njchkgyorcwmkvdpzxue.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_4sSK0_NZ12nosdyYVeqlbA_fWD7rPAQ'; // Replace with anon key from Supabase Settings → API
-  const ADMIN_PASSWORD = 'RegoMate2026!'; // Change this to your preferred password
-
-  // ── Auth ────────────────────────────────────────────────────
-  function login() {
-    const pw = document.getElementById('password-input').value;
-    if (pw === ADMIN_PASSWORD) {
-      sessionStorage.setItem('rm_admin', '1');
-      document.getElementById('login-screen').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      loadAll();
-    } else {
-      document.getElementById('login-error').style.display = 'block';
-    }
-  }
-
-  document.getElementById('password-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') login();
-  });
-
-  function logout() {
-    sessionStorage.removeItem('rm_admin');
-    location.reload();
-  }
-
-  if (sessionStorage.getItem('rm_admin')) {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-  }
-
-  // ── Supabase fetch ──────────────────────────────────────────
-  async function query(table, params = '') {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}${params}`, {
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-        'Range': '0-999'
-      }
-    });
-    if (!res.ok) throw new Error(`Supabase error: ${res.status}`);
-    return res.json();
-  }
-
+  const sb=supabase.createClient(RM_CONFIG.supabaseUrl,RM_CONFIG.supabaseKey);
+  async function login(){const errorEl=document.getElementById('login-error');errorEl.style.display='none';try{const {error}=await sb.auth.signInWithPassword({email:document.getElementById('admin-email').value,password:document.getElementById('password-input').value});if(error)throw error;await loadAll();}catch(e){errorEl.textContent=e.message;errorEl.style.display='block';}}
+  async function logout(){await sb.auth.signOut();location.reload();}
+  sb.auth.getSession().then(({data})=>{if(data.session)loadAll();});
+  async function fetchAdminData(){const {data:{session}}=await sb.auth.getSession();if(!session)throw new Error('Sign in required');const res=await fetch(RM_CONFIG.apiUrl+'/admin/data',{headers:{Authorization:'Bearer '+session.access_token}});const data=await res.json();if(!res.ok)throw new Error(data.error||'Administrator access denied');document.getElementById('login-screen').style.display='none';document.getElementById('app').style.display='block';return data;}
   // ── Tabs ────────────────────────────────────────────────────
-  function showTab(name) {
+  function showTab(name,tab) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    event.target.classList.add('active');
+    if(tab)tab.classList.add('active');
     document.getElementById('panel-' + name).classList.add('active');
   }
 
+function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
   // ── Helpers ─────────────────────────────────────────────────
   function fmt(dateStr) {
     if (!dateStr) return '—';
@@ -638,25 +600,20 @@
   // ── Load Data ───────────────────────────────────────────────
   async function loadAll() {
     try {
-      const [subscribers, vehicles, orders, smsLog] = await Promise.all([
-        query('subscribers', '?order=created_at.desc'),
-        query('vehicles', '?order=created_at.desc'),
-        query('orders', '?order=created_at.desc'),
-        query('sms_log', '?order=created_at.desc&limit=200')
-      ]);
-
+      const {subscribers,vehicles,orders,smsLog}=await fetchAdminData();
+      const safe=rows=>rows.map(row=>Object.fromEntries(Object.entries(row).map(([k,v])=>[k,typeof v==='string'?escapeHTML(v):v])));
       renderStats(subscribers, orders, smsLog);
-      renderRecentOrders(orders.slice(0, 10), subscribers);
-      renderSubscribers(subscribers);
-      renderVehicles(vehicles);
-      renderOrders(orders);
-      renderSMS(smsLog);
+      renderRecentOrders(safe(orders.slice(0, 10)),safe(subscribers));
+      renderSubscribers(safe(subscribers));
+      renderVehicles(safe(vehicles));
+      renderOrders(safe(orders));
+      renderSMS(safe(smsLog));
 
       document.getElementById('last-updated').textContent =
         `Last updated: ${new Date().toLocaleTimeString('en-AU')}`;
     } catch (err) {
       console.error(err);
-      alert('Failed to load data. Check your Supabase anon key in the dashboard file.');
+      document.getElementById('login-error').textContent=err.message;document.getElementById('login-error').style.display='block';
     }
   }
 

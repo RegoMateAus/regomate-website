@@ -1,0 +1,19 @@
+{
+  "name": "regomate-website",
+  "version": "2.0.0",
+  "private": true,
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.117.3",
+    "cheerio": "1.2.0"
+  },
+  "devDependencies": {
+    "jsdom": "30.1.2"
+  }
+}

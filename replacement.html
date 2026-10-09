@@ -89,77 +89,16 @@ select option{background:#1a2d4a;}
 
 <div class="content">
 
-  <div class="form-card" id="formCard">
+  <div class="form-card" id="formCard"><p>Order a replacement sticker from your signed-in account for $9.99 including postage. Select the vehicle and pay securely through Stripe.</p>
     <h2>Request a replacement</h2>
     <p class="sub2">Fill in your details and we'll dispatch a new sticker within 2 business days.</p>
 
     <div class="info-box"><strong>Active subscribers only.</strong> Replacement stickers are available to customers with an active RegoMate subscription. One free replacement per 12-month period.</div>
 
-    <form onsubmit="handleSubmit(event)">
-      <div class="form-row">
-        <div class="fg">
-          <label>First Name</label>
-          <input type="text" placeholder="Jane" required>
-        </div>
-        <div class="fg">
-          <label>Last Name</label>
-          <input type="text" placeholder="Smith" required>
-        </div>
-      </div>
-      <div class="fg">
-        <label>Email (used when you signed up)</label>
-        <input type="email" placeholder="jane@example.com" required>
-      </div>
-      <div class="form-row">
-        <div class="fg">
-          <label>Licence Plate</label>
-          <div class="plate-wrap">
-            <input type="text" placeholder="ABC123" maxlength="8" required>
-          </div>
-        </div>
-        <div class="fg">
-          <label>State</label>
-          <select required>
-            <option value="">Select state…</option>
-            <option>QLD</option>
-            <option>NSW</option>
-            <option>VIC</option>
-            <option>WA</option>
-            <option>SA</option>
-            <option>TAS</option>
-            <option>ACT</option>
-            <option>NT</option>
-          </select>
-        </div>
-      </div>
-      <div class="fg">
-        <label>Reason for replacement</label>
-        <select>
-          <option value="">Select a reason…</option>
-          <option>Sticker was damaged</option>
-          <option>Sticker was lost</option>
-          <option>New vehicle / windscreen replaced</option>
-          <option>Never received original sticker</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="fg">
-        <label>Delivery Address</label>
-        <input type="text" placeholder="123 Example St, Brisbane QLD 4000" required>
-      </div>
-      <button type="submit" class="submit-btn">Request Replacement Sticker</button>
-      <p class="fine">Replacement stickers are dispatched via standard Australia Post. Allow 5–10 business days for delivery.</p>
-    </form>
+    <p>Sign in to your account, choose your vehicle, and select Order replacement. A replacement sticker costs $9.99 including postage. Payment is completed through secure checkout.</p><p><a class="submit-btn" href="/login?next=account">Sign in to order a replacement</a></p>
   </div>
 
-  <div class="success-card" id="successCard">
-    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="24" cy="24" r="24" fill="rgba(29,158,117,0.15)"/>
-      <polyline points="14,24 20,30 34,18" stroke="#1d9e75" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <h3>Replacement requested!</h3>
-    <p>We've received your request and will dispatch your new sticker within 2 business days. You'll receive a confirmation email shortly.</p>
-  </div>
+  
 
 </div>
 
@@ -177,12 +116,7 @@ select option{background:#1a2d4a;}
 </footer>
 
 <script>
-function handleSubmit(e) {
-  e.preventDefault();
-  document.getElementById('formCard').style.display = 'none';
-  document.getElementById('successCard').style.display = 'block';
-  window.scrollTo({top: 0, behavior: 'smooth'});
-}
+function handleSubmit(e){e.preventDefault();location.href='/login?next=account';}
 </script>
 </body>
 </html>
